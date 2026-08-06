@@ -876,8 +876,9 @@ h1{font-size:21px;font-weight:600;letter-spacing:-.5px;line-height:1.15}
   padding:9px 16px;flex:0 0 auto;border-bottom:1px solid #ffffff14}
 #eico{width:24px;height:24px;flex:0 0 auto;border-radius:50%;
   box-shadow:0 0 0 1px #ffffff2e}
-#epreg{flex:1;min-width:0;font:inherit;font-size:14px;font-weight:300;
-  color:#fff;background:0;border:0;padding:6px 0;min-height:34px}
+#epreg{flex:1;min-width:0;font:inherit;font-size:16px;font-weight:300;
+  letter-spacing:-.1px;color:#fff;background:0;border:0;padding:4px 0;
+  min-height:32px}
 #epreg::placeholder{color:#ffffff6b;font-weight:300;font-style:italic;
   letter-spacing:.1px}
 #epreg:focus{outline:0}
@@ -962,6 +963,9 @@ body.cerrado header,body.cerrado .barra,body.cerrado #cuerpo{visibility:hidden}
 /* Todo en una pantalla: la página no hace scroll, el que se desplaza es el
    panel. El mapa necesita una altura resuelta o Leaflet no dibuja nada. */
 html,body{height:100%;overflow:hidden}
+@supports (height:100dvh){
+  html,body{height:100dvh}
+}
 body{display:flex;flex-direction:column}
 #cuerpo{flex:1;min-height:0;display:flex;flex-direction:column}
 /* En teléfono el mapa toma una PROPORCIÓN del hueco disponible, no una
@@ -1359,6 +1363,11 @@ mapa.eachLayer(c => {
   // avisa, Leaflet sigue con el tamaño viejo y las teselas quedan a medias
   const remide = () => requestAnimationFrame(() => {
     mapa.invalidateSize();
+    // Al encoger el mapa, avisar del tamaño no basta: el encuadre se queda como
+    // estaba y quedaban 9 puntos fuera. Se reencuadra SOLO si no hay ficha
+    // abierta; con una seleccionada el usuario está mirando algo concreto y
+    // moverle la vista sería peor que dejar un punto fuera.
+    if (sel < 0) verTodo();
   });
   // La × devuelve a Eria a reposo: sin texto, sin panel y sin foco. Antes
   // enfocaba el campo al limpiar, y el foco volvía a abrir las sugerencias, así
