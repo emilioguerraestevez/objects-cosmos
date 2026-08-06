@@ -6,6 +6,23 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0f3b2e">
 <meta name="robots" content="noindex,nofollow,noarchive,noimageindex">
+<!-- La tarjeta del enlace en WhatsApp. La imagen tiene que ir con URL ABSOLUTA:
+     el rastreador de WhatsApp no resuelve rutas relativas ni data URIs. Lo que
+     muestra es agregado a propósito —silueta y cifras totales—, porque la
+     miniatura queda guardada en el teléfono de quien reciba el enlace. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="objects · cosmos.ai">
+<meta property="og:locale" content="es_MX">
+<meta property="og:url" content="https://objects-cosmos.ai/podas/2026-07-29/">
+<meta property="og:title" content="Árboles por dictaminar · Alcaldía Cuauhtémoc">
+<meta property="og:description" content="281 pendientes al corte del 2026-07-29. Mapa de campo con la ubicación de cada reporte. Información de uso interno.">
+<meta property="og:image" content="https://objects-cosmos.ai/podas/2026-07-29/preview.jpg">
+<meta property="og:image:secure_url" content="https://objects-cosmos.ai/podas/2026-07-29/preview.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Silueta de la Alcaldía Cuauhtémoc con los reportes ubicados">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Podas CUH">
@@ -790,13 +807,16 @@ h1{font-size:21px;font-weight:600;letter-spacing:-.5px;line-height:1.15}
   text-transform:lowercase}
 .ttx{font-size:12.5px;color:#2b2f33;margin-top:9px;padding:9px 11px;
   background:#f4f6f5;border-radius:7px;line-height:1.45}
-/* El recorte deja asomar media línea por el relleno inferior: se cierra con un
-   fundido, que además avisa de que el texto sigue. */
+/* El recorte va por LÍNEAS, sin fundido: el degradado tapaba la última línea y
+   la dejaba cortada por la mitad. El botón "ver más" es el que avisa. */
 .ttx{position:relative}
 .ttx.corto{display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;
-  overflow:hidden;padding-bottom:0;max-height:calc(1.45em * 5 + 9px)}
-.ttx.corto:after{content:'';position:absolute;left:0;right:0;bottom:0;height:22px;
-  background:linear-gradient(to bottom,#f4f6f500,#f4f6f5)}
+  overflow:hidden}
+/* El clamp manda sobre max-height, así que a veces asoma el borde de la línea
+   siguiente. Un fundido CORTO lo difumina; con 22 px tapaba una línea entera. */
+.ttx.corto:after{content:'';position:absolute;left:1px;right:1px;bottom:1px;
+  height:11px;background:linear-gradient(to bottom,#f4f6f500,#f4f6f5);
+  border-radius:0 0 7px 7px}
 .vermas{font:inherit;font-size:11px;font-weight:600;letter-spacing:.3px;
   color:#1f5a46;background:0;border:0;padding:6px 2px 0;cursor:pointer}
 /* Cuando el reporte no describe nada, la tarjeta lo dice y manda al SUAC en vez
@@ -1172,8 +1192,13 @@ const pintaPanel = () => {
   // "…" sin salida esconde justo la seña que identifica al árbol.
   const tx = det.querySelector('[data-tx]');
   if (tx) {
+    // Se mide SIN el recorte y luego se recorta. Con -webkit-line-clamp activo,
+    // WebKit no reporta desbordamiento en scrollHeight: comparar scroll contra
+    // client funcionaba en Chrome y dejaba a Safari sin el botón "ver más".
+    const completo = tx.getBoundingClientRect().height;
     tx.classList.add('corto');
-    if (tx.scrollHeight > tx.clientHeight + 2) {
+    const recortado = tx.getBoundingClientRect().height;
+    if (completo > recortado + 2) {
       const b = document.createElement('button');
       b.className = 'vermas';
       b.textContent = 'ver más';
