@@ -883,8 +883,12 @@ h1{font-size:21px;font-weight:600;letter-spacing:-.5px;line-height:1.15}
 #epreg:focus{outline:0}
 #elimpia{flex:0 0 auto;width:30px;height:30px;border:0;background:0;color:#ffffff8a;
   font-size:19px;line-height:1;cursor:pointer;padding:0}
-#eresp{background:#0b2f24;color:#fff;padding:0 16px 13px;flex:0 0 auto;
-  border-bottom:1px solid #ffffff14}
+/* El panel de Eria se limita en alto y se desplaza por dentro: dejándolo crecer
+   libre se comía 193 px y no quedaba sitio para que el mapa siguiera siendo lo
+   primero que se ve. La respuesta cabe; los resultados de más se recorren. */
+#eresp{background:#0b2f24;color:#fff;padding:0 16px 13px;flex:0 1 auto;
+  border-bottom:1px solid #ffffff14;overflow-y:auto;
+  -webkit-overflow-scrolling:touch}
 #eresp b{display:block;font-size:15px;font-weight:500;line-height:1.4;
   letter-spacing:-.1px}
 #eresp .edet{font-size:12px;opacity:.62;margin-top:5px;line-height:1.45}
@@ -932,6 +936,12 @@ body.cerrado header,body.cerrado .barra,body.cerrado #cuerpo{visibility:hidden}
 .oculto{display:none}
 /* Por debajo de este ancho las tres zonas no caben en una línea: la marca sube
    a la derecha del título y las cifras se van a su propia fila, a lo ancho. */
+@media(max-width:899px){
+  /* Tope en PÍXELES, no en vh: con 29vh no llegaba a limitar en un iPhone de
+     390 y el panel seguía comiéndose 193 px. Los resultados que no caben se
+     recorren dentro del propio panel. */
+  #eresp{max-height:168px}
+}
 @media(max-width:1379px){
   .htit{flex:1 1 auto}
   .marca{order:2}
@@ -958,7 +968,8 @@ body{display:flex;flex-direction:column}
    fracción de la ventana: con "38vh" fijo, cada vez que Eria desplegaba su
    respuesta la reducción se la comía entera la lista de tarjetas. Así los dos
    se encogen a la par. */
-#mapa{position:relative;flex:0 0 42%;min-height:118px;background:#e8e6e1;z-index:1}
+#mapa{position:relative;flex:0 0 48%;min-height:150px;
+  background:#e8e6e1;z-index:1}
 #lista{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;
   padding-bottom:18px;background:#f2f3f4}
 @media(min-width:900px){
