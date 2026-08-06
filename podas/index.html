@@ -704,11 +704,13 @@ header{background:#0f3b2e;color:#fff;padding:17px 18px 16px;flex:0 0 auto;
 /* Una sola franja: título, cifras y marca conviven en la misma línea cuando hay
    ancho. Antes iban en dos filas y el centro quedaba vacío, que es lo que hacía
    que la barra se viera suelta en una pantalla grande. */
-/* El título abre, las cifras siguen y la marca cierra pegada al margen: el
-   dato queda entre el asunto y la firma, no después de la firma. El auto del
-   título es lo que empuja a las otras dos contra el borde derecho. */
-.hfila{display:flex;align-items:center;gap:14px 28px;flex-wrap:wrap}
-.htit{flex:0 1 auto;min-width:0;margin-right:auto}
+/* El título y las cifras forman UNA unidad a la izquierda; la marca se va sola
+   al margen derecho. Pegadas a la marca, las cifras se leían como parte del
+   lockup —como si "281 pendientes" fuera un descriptor de cosmos.ai— en vez de
+   como el dato del reporte. El auto va en las cifras, que es lo que abre el
+   hueco contra la marca. */
+.hfila{display:flex;align-items:center;gap:14px 26px;flex-wrap:wrap}
+.htit{flex:0 1 auto;min-width:0}
 h1{font-size:21px;font-weight:600;letter-spacing:-.5px;line-height:1.15}
 .sub{font-size:10.5px;font-weight:400;opacity:.5;margin-top:4px;line-height:1.35;
   letter-spacing:.35px;text-transform:uppercase}
@@ -723,7 +725,7 @@ h1{font-size:21px;font-weight:600;letter-spacing:-.5px;line-height:1.15}
    La cifra es la protagonista de la franja: grande y de peso ligero, que a ese
    tamaño se lee como dato y no como titular. */
 .kpi{order:2;flex:0 1 auto;display:grid;
-  grid-template-columns:repeat(4,minmax(0,auto));margin-top:0}
+  grid-template-columns:repeat(4,minmax(0,auto));margin:0 auto 0 0}
 .kpi div{min-width:0;padding-left:20px;border-left:1px solid #ffffff17}
 .kpi div:first-child{padding-left:0;border-left:0}
 .kpi b{display:block;font-size:34px;font-weight:300;letter-spacing:-1.3px;
@@ -874,6 +876,8 @@ body{display:flex;flex-direction:column}
    dato, y en 1432 px la marca se salía del borde. */
 @media(min-width:1380px){
   header{padding:20px 24px 19px}
+  /* el filete dice "esto pertenece al título", sin encerrarlo en una caja */
+  .kpi{padding-left:28px;border-left:1px solid #ffffff26;margin-left:2px}
   .kpi{max-width:860px}
   .kpi b{font-size:44px;letter-spacing:-1.8px}
   .kpi b em{font-size:15px;margin-left:6px}
