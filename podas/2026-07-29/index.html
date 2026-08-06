@@ -1258,6 +1258,22 @@ const marcar = i => marcas.forEach((m, k) => m.setStyle(k === i
 
 // mover=false cuando el toque vino del propio mapa: ahí el punto ya está a la
 // vista y recentrarlo de golpe hace perder la referencia de dónde se tocó
+// El "Ir en el mapa" es donde acaba la información y empieza la decisión: si al
+// abrir una ficha el botón queda fuera del panel —pasa en teléfono cuando el
+// reporte trae texto largo—, se desplaza lo justo para que se vea. No se centra
+// ni se salta la ficha: se garantiza que la salida esté al alcance.
+const aseguraIr = () => {
+  if (!lista) return;
+  const ir = det.querySelector('.tir');
+  if (!ir) return;
+  const r = ir.getBoundingClientRect(), c = lista.getBoundingClientRect();
+  // Se asigna scrollTop a mano: scrollIntoView no mueve este contenedor —medido,
+  // deja el scroll en 0—. Se desplaza lo MÍNIMO para que el botón entre, sin
+  // centrar la ficha ni saltarse su encabezado.
+  const sobra = r.bottom - c.bottom + 12;
+  if (sobra > 0) lista.scrollTop += sobra;
+};
+
 const abrir = (i, mover) => {
   if (!D[i]) return;
   sel = i;
@@ -1265,6 +1281,9 @@ const abrir = (i, mover) => {
   if (marcas[i].bringToFront) marcas[i].bringToFront();
   pintaPanel();
   if (lista) lista.scrollTop = 0;
+  // con un ciclo de animación no alcanza: el recorte del texto y el botón "ver
+  // más" siguen cambiando el alto, y el cálculo salía con medidas viejas
+  setTimeout(aseguraIr, 130);
   if (mover !== false) {
     // zoomToShowLayer destapa el grupo que lo contiene; si el punto está suelto
     // se comporta como un setView normal
@@ -1330,15 +1349,30 @@ mapa.eachLayer(c => {
   const remide = () => requestAnimationFrame(() => {
     mapa.invalidateSize();
   });
+  // La × devuelve a Eria a reposo: sin texto, sin panel y sin foco. Antes
+  // enfocaba el campo al limpiar, y el foco volvía a abrir las sugerencias, así
+  // que no había manera de cerrarla.
+  const cierra = () => {
+    preg.value = '';
+    limpia.classList.add('oculto');
+    resp.classList.add('oculto');
+    resp.innerHTML = '';
+    preg.blur();
+    remide();
+  };
   const pinta = (titular, detalle, is) => {
     resp.classList.remove('oculto');
+    limpia.classList.remove('oculto');
     resp.innerHTML = '<b>' + esc(titular) + '</b>' +
       (detalle ? '<div class="edet">' + esc(detalle) + '</div>' : '') +
       (is && is.length ? '<div class="elista">' + is.slice(0, 6).map(i =>
         '<button data-i="' + i + '">' + esc(nombre(i)) + '</button>').join('') +
         '</div>' : '');
+    // Elegir un resultado ES la decisión: Eria se cierra para que la ficha y su
+    // botón "Ir en el mapa" queden a la vista sin estorbo. Ahí termina el flujo
+    // de información y empieza la acción.
     resp.querySelectorAll('button[data-i]').forEach(b =>
-      b.onclick = () => abrir(+b.dataset.i));
+      b.onclick = () => { const i = +b.dataset.i; cierra(); abrir(i); });
     remide();
   };
   // Mientras se escribe NO se contesta "no sé": se ofrecen preguntas. Decirle a
@@ -1361,9 +1395,9 @@ mapa.eachLayer(c => {
     resp.innerHTML = '<div class="esug">Prueba con</div>' +
       '<div class="elista">' + lista.slice(0, 4).map(e =>
         '<button data-q="' + esc(e) + '">' + esc(e) + '</button>').join('') + '</div>';
+    limpia.classList.remove('oculto');
     resp.querySelectorAll('button[data-q]').forEach(b => b.onclick = () => {
       preg.value = b.dataset.q;
-      limpia.classList.remove('oculto');
       responde(preg.value, true);
     });
     remide();
@@ -1501,13 +1535,9 @@ mapa.eachLayer(c => {
       responde(preg.value, true);           // aquí sí puede decir que no sabe
       preg.blur();
     }
-    if (ev.key === 'Escape') { preg.value = ''; limpia.classList.add('oculto');
-      resp.classList.add('oculto'); preg.blur(); remide(); }
+    if (ev.key === 'Escape') cierra();
   });
-  limpia.onclick = () => {
-    preg.value = ''; limpia.classList.add('oculto');
-    resp.classList.add('oculto'); preg.focus(); remide();
-  };
+  limpia.onclick = cierra;
 })();
 
 verTodo();
