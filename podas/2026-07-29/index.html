@@ -718,6 +718,13 @@ h1{font-size:21px;font-weight:600;letter-spacing:-.5px;line-height:1.15}
    separador se leían como un solo lockup de una marca inventada. */
 .marca{display:flex;align-items:center;gap:15px;flex:0 0 auto;order:3}
 .marca .lg{width:auto;opacity:.92;display:block}
+/* Cada logo trae distinta proporción de aire en su caja —el "!" de eureka sube,
+   la "g" de Intelligence baja, el disco de cosmos ocupa el alto completo—, así
+   que centrarlos por caja dejaba sus textos en tres alturas distintas: 2.5 px de
+   diferencia, suficiente para verse desalineado. Esto los pone en una línea. */
+.lg-eureka{transform:translateY(-1.2px)}
+.lg-astra{transform:translateY(-.2px)}
+.lg-cosmos{transform:translateY(1.3px)}
 .lg-eureka{height:16px} .lg-astra{height:19px} .lg-cosmos{height:26px}
 .marca i{width:1px;height:15px;background:#ffffff2e;flex:0 0 auto}
 /* Retícula, no flex libre: las cuatro cifras arrancan en la misma columna y
