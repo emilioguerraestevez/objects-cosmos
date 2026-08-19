@@ -4,8 +4,8 @@
 <title>eureka! · Desarrollo Económico · Estado de México</title>
 <style>
 :root{
-  --tinta:#12100c; --tinta2:#4a463d; --mudo:#8b8578; --linea:#e5e1d6;
-  --papel:#fffef9; --tarjeta:#fff; --marca:#f6e359; --barra:#2b2723;
+  --tinta:#12100c; --tinta2:#4a463d; --mudo:#8b8578; --linea:#e6e6e6;
+  --papel:#fff; --tarjeta:#fff; --marca:#f6e359; --barra:#2b2723;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--papel);color:var(--tinta);
@@ -30,6 +30,16 @@ header{padding:56px 0 8px;text-align:center}
 .kpi .n{font-size:27px;font-weight:700;letter-spacing:-.02em;margin:6px 0 2px;
   font-variant-numeric:tabular-nums}
 .kpi .p{font-size:12.5px;color:var(--tinta2)}
+.sabias{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:12px;margin:0 0 30px}
+.sq{background:#fffdf2;border:1px solid #f0e6b8;border-radius:12px;padding:15px 17px;
+  display:flex;gap:12px;align-items:flex-start}
+.sq .bang{background:var(--marca);color:var(--tinta);font:italic 800 15px/24px 'Poppins',Georgia,serif;
+  width:24px;height:24px;border-radius:6px;text-align:center;flex:none}
+.sq h4{margin:0 0 4px;font-size:13.5px;line-height:1.35;font-weight:650}
+.sq p{margin:0;font-size:12.5px;color:var(--tinta2);line-height:1.45}
+.rotulo{font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--mudo);
+  font-weight:600;margin:0 0 12px}
 nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
 nav button{border:1px solid var(--linea);background:#fff;border-radius:999px;
   padding:8px 16px;cursor:pointer;font-family:inherit;font-size:13.5px;color:var(--tinta2)}
@@ -42,19 +52,27 @@ nav button.on{background:var(--tinta);color:#fff;border-color:var(--tinta)}
   padding:3px 0;outline:none}
 .fila:hover .pista i,.fila:focus .pista i{background:var(--tinta)}
 .et{font-size:12.5px;color:var(--tinta2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.pista{background:#f3f1ea;border-radius:4px;height:11px;overflow:hidden}
+.pista{background:#f0f0f0;border-radius:4px;height:11px;overflow:hidden}
 .pista i{display:block;height:100%;background:var(--barra);border-radius:0 4px 4px 0;
   transition:background .15s}
 .val{font-size:12.5px;text-align:right;font-variant-numeric:tabular-nums;color:var(--tinta)}
 .pie{margin:14px 0 0;font-size:12px;color:var(--mudo);line-height:1.45}
 .res{margin-top:6px}
-.item{background:#fff;border:1px solid var(--linea);border-radius:10px;padding:14px 16px;
-  margin-bottom:9px}
-.item h4{margin:0 0 4px;font-size:15px}
-.item .meta{font-size:12.5px;color:var(--mudo)}
-.item .cpo{font-size:13px;color:var(--tinta2);margin-top:7px}
+.item{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:16px 18px;
+  margin-bottom:10px}
+.item h4{margin:0 0 6px;font-size:15.5px;line-height:1.3}
+.item .meta{font-size:12.5px;color:var(--mudo);display:flex;gap:6px;align-items:center;
+  flex-wrap:wrap}
+.item .cpo{font-size:13px;color:var(--tinta2);margin-top:9px;line-height:1.5}
+/* los datos duros de la tarjeta, en renglones de etiqueta y valor */
+.campos{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px 18px;
+  margin-top:11px;padding-top:11px;border-top:1px solid #f0f0f0}
+.campo .k{font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--mudo);
+  font-weight:600}
+.campo .v{font-size:13px;color:var(--tinta);margin-top:1px}
+.cifra{font-size:16px;font-weight:700;font-variant-numeric:tabular-nums}
 .chip{display:inline-block;font-size:11px;padding:2px 9px;border-radius:999px;
-  background:#f3f1ea;color:var(--tinta2);margin-right:6px}
+  background:#f4f4f4;color:var(--tinta2);margin-right:6px}
 .chip.amarillo{background:var(--marca);color:var(--tinta);font-weight:600}
 mark{background:var(--marca);padding:0 2px}
 .vacio{color:var(--mudo);padding:28px 0;text-align:center}
@@ -85,6 +103,9 @@ footer .txt{text-align:left}
 </header>
 
 <div class=kpis><div class=kpi><div class=et>Empresas</div><div class=n>1,836</div><div class=p>en 79 municipios</div></div><div class=kpi><div class=et>Proyectos</div><div class=n>323</div><div class=p>prospección, anuncios e inauguraciones</div></div><div class=kpi><div class=et>Inversión anunciada</div><div class=n>2,259 MDD</div><div class=p>más 24,627 MDP nacionales</div></div><div class=kpi><div class=et>Empleos por generar</div><div class=n>8,639</div><div class=p>declarados en los proyectos</div></div><div class=kpi><div class=et>Solicitudes</div><div class=n>10</div><div class=p>empresas esperando respuesta</div></div></div>
+
+<p class=rotulo>¿Sabías que…?</p>
+<div class=sabias><div class=sq><span class=bang>!</span><div><h4>Toluca concentra 55 de cada 100 pesos comprometidos</h4><p>Los otros 62 municipios con proyecto se reparten el resto.</p></div></div><div class=sq><span class=bang>!</span><div><h4>256 de los 323 proyectos no traen monto declarado</h4><p>Ocho de cada diez están en prospección: el monto se conoce después.</p></div></div><div class=sq><span class=bang>!</span><div><h4>La mayor apuesta es Stellantis, en Toluca</h4><p>696 millones de dólares</p></div></div><div class=sq><span class=bang>!</span><div><h4>Dixima Pharmaceutical promete 1,200 empleos</h4><p>Es el proyecto más grande en gente, y va en Toluca.</p></div></div><div class=sq><span class=bang>!</span><div><h4>35 municipios reciben inversión sin tener una sola empresa en el directorio</h4><p>O el directorio está incompleto, o llega industria nueva a territorio sin registrar.</p></div></div><div class=sq><span class=bang>!</span><div><h4>386 empresas no tienen rama asignada</h4><p>Vienen solo en la hoja general: nadie las clasificó al capturarlas.</p></div></div><div class=sq><span class=bang>!</span><div><h4>Solo 46 de 323 proyectos traen capital extranjero</h4><p>El resto es inversión nacional, que es la que sostiene la cartera.</p></div></div></div>
 
 <nav>
   <button class=on onclick="tab('todo',this)">Todo</button>
@@ -135,29 +156,43 @@ function filtra(cual){
   if(!Q) return DATOS[cual];
   return DATOS[cual].filter(x => campos[cual].some(c => norm(x[c]).includes(norm(Q))));
 }
+const campo = (k,v) => v ? `<div class=campo><div class=k>${k}</div><div class=v>${v}</div></div>` : '';
 function pintaEmpresa(e){
+  const d = [campo('Municipio', e.municipio), campo('Rama', e.hoja!=='GENERAL'?e.hoja.toLowerCase():''),
+             campo('Sector declarado', e.sector), campo('Domicilio', e.calle),
+             campo('Contacto', e.contacto? e.contacto+(e.cargo?' · '+e.cargo:''):''),
+             campo('Teléfono', e.tel), campo('Correo', e.correo)].join('');
   return `<div class=item><h4>${resalta(e.empresa,Q)}</h4>
-  <div class=meta><span class=chip>${e.municipio||'sin municipio'}</span>
-  ${e.hoja&&e.hoja!=='GENERAL'?'<span class=chip>'+e.hoja.toLowerCase()+'</span>':''}
-  ${e.contacto? e.contacto+(e.cargo?' · '+e.cargo:''):''}</div>
-  ${e.productos?'<div class=cpo>'+resalta(e.productos,Q)+'</div>':''}</div>`;
+  <div class=meta><span class=chip>Empresa</span>
+  <span class=chip>${e.municipio||'sin municipio'}</span>
+  ${e.hoja&&e.hoja!=='GENERAL'?'<span class=chip>'+e.hoja.toLowerCase()+'</span>':''}</div>
+  ${e.productos?'<div class=cpo>'+resalta(e.productos,Q)+'</div>':''}
+  ${d?'<div class=campos>'+d+'</div>':''}</div>`;
 }
 function pintaInv(x){
   const m = [];
-  if(x.mdd) m.push(x.mdd.toLocaleString('es-MX')+' MDD');
-  if(x.mdp) m.push(x.mdp.toLocaleString('es-MX')+' MDP');
+  if(x.mdd) m.push('<span class=cifra>'+x.mdd.toLocaleString('es-MX')+'</span> MDD');
+  if(x.mdp) m.push('<span class=cifra>'+x.mdp.toLocaleString('es-MX')+'</span> MDP');
+  const d = [campo('Municipio', x.municipio), campo('Rama', x.sector),
+             campo('Inversión', m.length? m.join(' + ') : 'no declarada'),
+             campo('Empleos a generar', x.empleos),
+             campo('Etapa', x.estatus), campo('Responsable', x.responsable)].join('');
   return `<div class=item><h4>${resalta(x.empresa,Q)}</h4>
   <div class=meta><span class="chip amarillo">${x.tipo}</span>
-  <span class=chip>${x.municipio||'sin municipio'}</span>
-  ${m.length? m.join(' + '):'monto no declarado'}
-  ${x.empleos? ' · '+x.empleos+' empleos':''}</div>
-  ${x.concepto?'<div class=cpo>'+resalta(x.concepto,Q)+'</div>':''}</div>`;
+  <span class=chip>${x.municipio||'sin municipio'}</span></div>
+  ${x.concepto?'<div class=cpo>'+resalta(x.concepto,Q)+'</div>':''}
+  ${d?'<div class=campos>'+d+'</div>':''}
+  ${x.nota?'<div class=cpo style="color:var(--mudo);font-size:12px">'+x.nota.slice(0,320)+'</div>':''}</div>`;
 }
 function pintaSol(s){
+  const d = [campo('Municipio', s.municipio), campo('Contacto', s.contacto),
+             campo('Teléfono', s.tel), campo('Correo', s.correo)].join('');
   return `<div class=item><h4>${resalta(s.empresa,Q)}</h4>
-  <div class=meta><span class=chip>${s.municipio}</span>${s.contacto||''}</div>
-  <div class=cpo>${resalta(s.requerimiento,Q)}</div>
-  ${s.comentarios?'<div class=cpo style="color:var(--mudo)">'+s.comentarios+'</div>':''}</div>`;
+  <div class=meta><span class="chip amarillo">Solicitud de apoyo</span>
+  <span class=chip>${s.municipio}</span></div>
+  <div class=cpo><b>Pide:</b> ${resalta(s.requerimiento,Q)}</div>
+  ${s.comentarios?'<div class=cpo style="color:var(--mudo)"><b>En qué va:</b> '+s.comentarios+'</div>':''}
+  ${d?'<div class=campos>'+d+'</div>':''}</div>`;
 }
 function render(){
   const p = document.getElementById('panel');
