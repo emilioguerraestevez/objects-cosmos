@@ -3,11 +3,12 @@
 <meta name=robots content="noindex,nofollow">
 <title>eureka! · Desarrollo Económico · Estado de México</title>
 <style>
-:root{--tinta:#12100c;--tinta2:#4a463d;--mudo:#8b8578;--linea:#e6e6e6;
- --papel:#fff;--marca:#f6e359;--barra:#2b2723;--liga:#1a0dab}
+:root{--tinta:#1a1a1a;--tinta2:#4d5156;--mudo:#70757a;--linea:#dfe1e5;
+ --papel:#fff;--marca:#f6e359;--marca-suave:#fbf4b9;--barra:#2b2723}
 *{box-sizing:border-box}
 body{margin:0;background:var(--papel);color:var(--tinta);
- font:15px/1.5 'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+ font:14px/1.5 'Poppins',system-ui,-apple-system,sans-serif}
+b{font-weight:600}
 .env{max-width:1120px;margin:0 auto;padding:0 24px}
 .oculto{display:none!important}
 /* ── portada ── */
@@ -18,8 +19,10 @@ body{margin:0;background:var(--papel);color:var(--tinta);
  border-radius:999px;overflow:hidden;background:#fff}
 .buscador input{flex:1;border:0;padding:15px 22px;font-size:16px;outline:none;
  font-family:inherit;background:transparent}
-.buscador button{border:0;background:var(--marca);padding:0 26px;font-weight:700;cursor:pointer;
+.buscador button{border:0;background:var(--marca);padding:0 26px;font-weight:600;cursor:pointer;
  font-family:inherit;font-size:15px}
+.hl{background:linear-gradient(transparent 55%,var(--marca) 55%,var(--marca) 92%,
+ transparent 92%);font-style:italic;font-weight:500}
 .pistas{text-align:center;color:var(--mudo);font-size:13px;margin-bottom:34px}
 .pistas a{color:var(--tinta2);cursor:pointer;border-bottom:1px solid var(--linea);
  margin:0 7px;text-decoration:none}
@@ -33,23 +36,30 @@ body{margin:0;background:var(--papel);color:var(--tinta);
 .sb input{flex:1;border:0;padding:10px 18px;font:inherit;font-size:15px;outline:none}
 .sb button{border:0;background:transparent;padding:0 16px;cursor:pointer;font-size:15px}
 #tabs{display:flex;gap:22px;padding-bottom:0}
-#tabs a{font-size:13.5px;color:var(--tinta2);cursor:pointer;padding:0 0 10px;
+#tabs a{font-size:13.5px;color:var(--mudo);cursor:pointer;padding:8px 2px 10px;
  border-bottom:3px solid transparent;text-decoration:none}
-#tabs a.on{color:var(--tinta);font-weight:600;border-bottom-color:var(--marca)}
+#tabs a:hover{color:var(--tinta)}
+#tabs a.on{color:var(--tinta);font-weight:500;border-bottom-color:var(--marca)}
 .cuenta{color:var(--mudo);font-size:12.5px;padding:14px 0 4px}
 /* ── resultados ── */
 .res{max-width:720px;padding-bottom:40px}
-.hit{padding:16px 0 14px;border-bottom:1px solid #f2f2f2}
-.hit .ruta{font-size:12px;color:var(--mudo);margin-bottom:2px}
-.hit h3{margin:0 0 4px;font-size:19px;font-weight:500;line-height:1.3}
-.hit h3 a{color:var(--liga);cursor:pointer;text-decoration:none}
-.hit h3 a:hover{text-decoration:underline}
+.hit{padding:13px 0}
+.hit .ruta{font-size:12px;color:var(--mudo);font-weight:300;display:flex;align-items:center;
+ gap:8px;margin-bottom:1px}
+.hit .ruta .tipo{display:inline-flex;align-items:center;gap:5px;font-weight:500;color:#3c4043}
+.hit .ruta .dot{width:8px;height:8px;border-radius:2px;background:var(--marca);
+ display:inline-block}
+/* el título va en tinta y se subraya con marcador al pasar: es la firma de eureka! */
+.hit h3{margin:3px 0 2px;font-size:17.5px;font-weight:500;line-height:1.3;cursor:pointer;
+ display:inline-block}
+.hit h3:hover{background:linear-gradient(transparent 60%,var(--marca) 60%,
+ var(--marca) 95%,transparent 95%)}
 .hit .snip{font-size:13.5px;color:var(--tinta2);line-height:1.5}
-.hit .chips{margin-top:7px}
-.chip{display:inline-block;font-size:11px;padding:2px 9px;border-radius:999px;
- background:#f4f4f4;color:var(--tinta2);margin-right:6px}
-.chip.amarillo{background:var(--marca);color:var(--tinta);font-weight:600}
-mark{background:var(--marca);padding:0 2px}
+.hit .snip b{font-weight:600;color:var(--tinta)}
+.hit .chips{margin-top:6px}
+.chip{display:inline-block;background:#f1f3f4;border-radius:6px;padding:2px 8px;
+ font-size:11.5px;margin:2px 3px 2px 0;color:#3c4043}
+.chip.amarillo{background:var(--marca-suave);color:var(--tinta);font-weight:500}
 .pager{display:flex;gap:10px;align-items:center;padding:26px 0;font-size:13.5px}
 .pager button{padding:8px 18px;border:1px solid var(--linea);background:#fff;border-radius:20px;
  cursor:pointer;font:inherit;font-size:13px}
@@ -96,7 +106,7 @@ mark{background:var(--marca);padding:0 2px}
  padding:3px 0;cursor:pointer}
 .fila:hover .pista i{background:var(--tinta)}
 .et{font-size:12.5px;color:var(--tinta2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.pista{background:#f0f0f0;border-radius:4px;height:11px;overflow:hidden}
+.pista{background:#f1f3f4;border-radius:4px;height:11px;overflow:hidden}
 .pista i{display:block;height:100%;background:var(--barra);border-radius:0 4px 4px 0}
 .val{font-size:12.5px;text-align:right;font-variant-numeric:tabular-nums}
 .pie{margin:14px 0 0;font-size:12px;color:var(--mudo);line-height:1.45}
@@ -118,7 +128,7 @@ footer .txt{text-align:left}
    <div class=sub>Secretaría de Desarrollo Económico · Gobierno del Estado de México</div>
    <form class=buscador onsubmit="return desdePortada(event)">
      <input id=q-home placeholder="Busca una empresa, un municipio, un sector…" autocomplete=off>
-     <button>Buscar</button>
+     <button>Buscar en <span class=hl>eureka!</span></button>
    </form>
    <div class=pistas>Prueba:
      <a onclick="buscar('Toluca')">Toluca</a><a onclick="buscar('automotriz')">automotriz</a>
@@ -224,12 +234,14 @@ function encuentra(){
   if (T!=='todo') r = r.filter(o=>o.clase===T);
   return r;
 }
+/* eureka! resalta la coincidencia en negrita, no con marcador: el amarillo se
+   reserva para el subrayado del título y los acentos de marca */
 function resalta(t){
   const s = (t??'').toString();
   if(!Q) return esc(s);
   const i = norm(s).indexOf(norm(Q));
   return i<0 ? esc(s)
-    : esc(s.slice(0,i))+'<mark>'+esc(s.slice(i,i+Q.length))+'</mark>'+esc(s.slice(i+Q.length));
+    : esc(s.slice(0,i))+'<b>'+esc(s.slice(i,i+Q.length))+'</b>'+esc(s.slice(i+Q.length));
 }
 const montos = x => [x.mdd?fmt(x.mdd)+' MDD':null, x.mdp?fmt(x.mdp)+' MDP':null]
   .filter(Boolean).join(' + ');
@@ -237,22 +249,25 @@ const montos = x => [x.mdd?fmt(x.mdd)+' MDD':null, x.mdp?fmt(x.mdp)+' MDP':null]
 function tarjeta(o){
   const x=o.x, id=o.clase+'-'+o.i;
   if(o.clase==='empresas') return `<div class=hit>
-    <div class=ruta>Directorio 2024 · ${esc(x.municipio||'sin municipio')}</div>
-    <h3><a onclick="ficha('${id}')">${resalta(x.empresa)}</a></h3>
+    <div class=ruta><span class=tipo><span class=dot></span>Directorio 2024</span>
+      ${esc(x.municipio||'sin municipio')}</div>
+    <h3 onclick="ficha('${id}')">${resalta(x.empresa)}</h3>
     <div class=snip>${x.productos?resalta(x.productos.slice(0,190)):'Sin descripción de productos.'}</div>
     <div class=chips><span class=chip>Empresa</span>
       ${x.hoja&&x.hoja!=='GENERAL'?'<span class=chip>'+esc(x.hoja.toLowerCase())+'</span>':''}
       ${x.tel?'<span class=chip>tiene contacto</span>':''}</div></div>`;
   if(o.clase==='inversiones') return `<div class=hit>
-    <div class=ruta>Inversiones · ${esc(x.tipo)} · ${esc(x.municipio||'sin municipio')}</div>
-    <h3><a onclick="ficha('${id}')">${resalta(x.empresa)}</a></h3>
+    <div class=ruta><span class=tipo><span class=dot></span>Inversiones</span>
+      ${esc(x.tipo)} · ${esc(x.municipio||'sin municipio')}</div>
+    <h3 onclick="ficha('${id}')">${resalta(x.empresa)}</h3>
     <div class=snip>${x.concepto?resalta(x.concepto):'Sin concepto declarado.'}
       ${montos(x)?' — <b>'+montos(x)+'</b>':''}${x.empleos?' · '+esc(x.empleos)+' empleos':''}</div>
     <div class=chips><span class="chip amarillo">${esc(x.tipo)}</span>
       ${x.sector?'<span class=chip>'+esc(x.sector.slice(0,40))+'</span>':''}</div></div>`;
   return `<div class=hit>
-    <div class=ruta>Solicitudes de apoyo · ${esc(x.municipio)}</div>
-    <h3><a onclick="ficha('${id}')">${resalta(x.empresa)}</a></h3>
+    <div class=ruta><span class=tipo><span class=dot></span>Solicitudes de apoyo</span>
+      ${esc(x.municipio)}</div>
+    <h3 onclick="ficha('${id}')">${resalta(x.empresa)}</h3>
     <div class=snip>${resalta((x.requerimiento||'').slice(0,220))}</div>
     <div class=chips><span class="chip amarillo">Solicitud de apoyo</span></div></div>`;
 }
