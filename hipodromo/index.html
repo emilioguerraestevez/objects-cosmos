@@ -896,12 +896,27 @@ map.fitBounds(capaCol.getBounds(),{padding:[26,26]});
 
 /* la puerta se recuerda por sesión: no vuelve a preguntar al navegar */
 (function(){
- const p=document.getElementById('puerta'), chk=document.getElementById('chk'),
-       btn=document.getElementById('entrar');
- if(sessionStorage.getItem('hip_ok')==='1'){p.remove(); return;}
+ var p=document.getElementById('puerta'), chk=document.getElementById('chk'),
+     btn=document.getElementById('entrar');
+ if(!p) return;
+ /* En navegación privada de iOS el almacenamiento puede lanzar excepción. Sin
+    try/catch la función entera se rompía aquí y el botón se quedaba muerto. */
+ var memoria={get:function(){try{return sessionStorage.getItem('hip_ok');}catch(e){return null;}},
+              set:function(){try{sessionStorage.setItem('hip_ok','1');}catch(e){}}};
+ function abrir(){
+   memoria.set();
+   if(p&&p.parentNode) p.parentNode.removeChild(p);
+   document.body.style.overflow='';
+   try{ setTimeout(function(){ if(window.map&&map.invalidateSize) map.invalidateSize(); },140); }catch(e){}
+ }
+ if(memoria.get()==='1'){ abrir(); return; }
  document.body.style.overflow='hidden';
- chk.onchange=()=>btn.disabled=!chk.checked;
- btn.onclick=()=>{sessionStorage.setItem('hip_ok','1'); p.remove();
-  document.body.style.overflow=''; setTimeout(()=>map.invalidateSize(),120);};
+ function revisa(){ btn.disabled=!chk.checked; }
+ chk.addEventListener('change',revisa);
+ chk.addEventListener('click',revisa);
+ /* el botón decide por el estado real de la casilla, no por su propio disabled:
+    si algún manejador no llegó a colgarse, entrar sigue funcionando */
+ btn.addEventListener('click',function(){ if(chk.checked) abrir(); });
+ revisa();
 })();
 </script></body></html>
