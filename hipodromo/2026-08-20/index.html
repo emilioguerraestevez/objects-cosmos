@@ -14,8 +14,12 @@
  --margen:calc(max(0px,(100vw - var(--riel))/2) + var(--aire))}
 *{box-sizing:border-box;margin:0}
 body{font:13.5px/1.5 'Poppins',system-ui,sans-serif;color:var(--tinta);background:#fff}
-button{font-family:inherit;color:inherit;-webkit-appearance:none;appearance:none;
- -webkit-text-fill-color:currentColor;cursor:pointer}
+/* Safari en iOS pinta el texto de los botones con su azul de sistema y manda
+   sobre `color`: hay que apagar la apariencia nativa y fijar el text-fill */
+button{font-family:inherit;color:var(--tinta);-webkit-appearance:none;appearance:none;
+ -webkit-text-fill-color:var(--tinta);cursor:pointer}
+html{-webkit-text-size-adjust:100%}
+*{-webkit-tap-highlight-color:rgba(246,227,89,.35)}
 html{-webkit-text-size-adjust:100%}
 .tope{max-width:var(--riel);margin:0 auto;padding:14px 22px 10px;display:flex;align-items:center;
  justify-content:space-between;gap:16px}
@@ -38,6 +42,31 @@ h1 em{font-style:normal;padding:0 .08em;
 .rej{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:18px;align-items:start}
 .rej>div{display:flex;flex-direction:column;height:100%}
 @media(max-width:860px){.rej,.tarj{grid-template-columns:1fr}}
+/* ── teléfono ────────────────────────────────────────────────────────────── */
+@media(max-width:700px){
+ :root{--aire:14px}
+ .tope{padding:12px var(--aire) 8px;flex-direction:column;align-items:flex-start;gap:4px}
+ .tope .q{text-align:left;font-size:11px}
+ #mapa{height:46vh;min-height:280px;border-radius:10px}
+ .env{padding:14px var(--aire) 8px}
+ h1{font-size:18.5px;margin-bottom:11px}
+ .t{padding:11px 13px}
+ .t h3{font-size:13px}
+ .t p{font-size:12px}
+ .t .n{font-size:16px}
+ .rej{gap:14px;margin-top:14px}
+ /* la caja conserva su scroll: soltar 42 filas alargaría la página unos
+    1 400 px. Con inercia de iOS el gesto se siente natural. */
+ .scroll{height:270px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+ table{font-size:12.5px}
+ th{padding:6px 8px;font-size:9.2px}
+ td{padding:9px 8px}            /* 34 px de alto: cabe el dedo */
+ td.r{width:20px;font-size:10.5px}
+ .pin{font-size:10.5px;padding:4px 8px;max-width:74vw;overflow:hidden;text-overflow:ellipsis}
+ .reset{padding:6px 10px;font-size:11px}
+ footer{flex-direction:column;align-items:flex-start;gap:12px;font-size:11px}
+ .impressum{height:26px}
+}
 h2{font-size:10.5px;text-transform:uppercase;letter-spacing:.11em;color:var(--mudo);
  font-weight:600;margin-bottom:7px}
 .caja{border:1px solid var(--linea);border-radius:11px;overflow:hidden}
@@ -96,7 +125,7 @@ footer{max-width:var(--riel);margin:22px auto 0;padding:14px 22px 0;border-top:1
  <div><h2>Ranking por rentabilidad · las 42 calles</h2>
   <div class="caja scroll"><table id=tr><thead><tr><th></th><th>Calle</th><th class=n>Score</th>
    <th class=n>Metros</th></tr></thead><tbody><tr data-i="0" onclick="sel(0)" class="hui"><td class=r>1</td><td>Huichapan</td><td class=n>24.8</td><td class=n>171</td></tr><tr data-i="1" onclick="sel(1)" class=""><td class=r>2</td><td>Tehuantepec</td><td class=n>23.8</td><td class=n>401</td></tr><tr data-i="2" onclick="sel(2)" class=""><td class=r>3</td><td>Nuevo León</td><td class=n>23.8</td><td class=n>274</td></tr><tr data-i="3" onclick="sel(3)" class=""><td class=r>4</td><td>Quintana Roo</td><td class=n>23.8</td><td class=n>261</td></tr><tr data-i="4" onclick="sel(4)" class=""><td class=r>5</td><td>Av. Sonora</td><td class=n>23.6</td><td class=n>1,091</td></tr><tr data-i="5" onclick="sel(5)" class=""><td class=r>6</td><td>Culiacán</td><td class=n>23.6</td><td class=n>730</td></tr><tr data-i="6" onclick="sel(6)" class=""><td class=r>7</td><td>Plaza Popocatépetl</td><td class=n>23.5</td><td class=n>198</td></tr><tr data-i="7" onclick="sel(7)" class=""><td class=r>8</td><td>Celaya</td><td class=n>23.4</td><td class=n>202</td></tr><tr data-i="8" onclick="sel(8)" class=""><td class=r>9</td><td>Tlaxcala</td><td class=n>23.2</td><td class=n>392</td></tr><tr data-i="9" onclick="sel(9)" class=""><td class=r>10</td><td>Vicente Suárez</td><td class=n>22.7</td><td class=n>184</td></tr><tr data-i="10" onclick="sel(10)" class=""><td class=r>11</td><td>de Parras</td><td class=n>22.6</td><td class=n>168</td></tr><tr data-i="11" onclick="sel(11)" class=""><td class=r>12</td><td>Aguascalientes</td><td class=n>22.3</td><td class=n>623</td></tr><tr data-i="12" onclick="sel(12)" class=""><td class=r>13</td><td>Av. Insurgentes Sur</td><td class=n>21.9</td><td class=n>1,724</td></tr><tr data-i="13" onclick="sel(13)" class=""><td class=r>14</td><td>Campeche</td><td class=n>21.6</td><td class=n>1,197</td></tr><tr data-i="14" onclick="sel(14)" class=""><td class=r>15</td><td>Chilpancingo</td><td class=n>21.6</td><td class=n>580</td></tr><tr data-i="15" onclick="sel(15)" class=""><td class=r>16</td><td>Av. Baja California</td><td class=n>21.1</td><td class=n>928</td></tr><tr data-i="16" onclick="sel(16)" class=""><td class=r>17</td><td>General Benjamín Hill</td><td class=n>20.6</td><td class=n>997</td></tr><tr data-i="17" onclick="sel(17)" class=""><td class=r>18</td><td>Ensenada</td><td class=n>20.6</td><td class=n>666</td></tr><tr data-i="18" onclick="sel(18)" class=""><td class=r>19</td><td>Citlaltépetl</td><td class=n>20.6</td><td class=n>620</td></tr><tr data-i="19" onclick="sel(19)" class=""><td class=r>20</td><td>Av. Nuevo León</td><td class=n>20.3</td><td class=n>2,604</td></tr><tr data-i="20" onclick="sel(20)" class=""><td class=r>21</td><td>Laredo</td><td class=n>20.2</td><td class=n>166</td></tr><tr data-i="21" onclick="sel(21)" class=""><td class=r>22</td><td>Mexicali</td><td class=n>20.0</td><td class=n>447</td></tr><tr data-i="22" onclick="sel(22)" class=""><td class=r>23</td><td>Cholula</td><td class=n>19.9</td><td class=n>663</td></tr><tr data-i="23" onclick="sel(23)" class=""><td class=r>24</td><td>Av. México</td><td class=n>19.6</td><td class=n>1,228</td></tr><tr data-i="24" onclick="sel(24)" class=""><td class=r>25</td><td>Alfonso Reyes</td><td class=n>19.5</td><td class=n>1,195</td></tr><tr data-i="25" onclick="sel(25)" class=""><td class=r>26</td><td>Iztaccihuatl</td><td class=n>19.5</td><td class=n>261</td></tr><tr data-i="26" onclick="sel(26)" class=""><td class=r>27</td><td>Av. Tamaulipas</td><td class=n>19.4</td><td class=n>532</td></tr><tr data-i="27" onclick="sel(27)" class=""><td class=r>28</td><td>Reynosa</td><td class=n>19.4</td><td class=n>252</td></tr><tr data-i="28" onclick="sel(28)" class=""><td class=r>29</td><td>Av. Ozuluama</td><td class=n>19.4</td><td class=n>192</td></tr><tr data-i="29" onclick="sel(29)" class=""><td class=r>30</td><td>Av. Amsterdam</td><td class=n>19.3</td><td class=n>3,664</td></tr><tr data-i="30" onclick="sel(30)" class=""><td class=r>31</td><td>Saltillo</td><td class=n>19.2</td><td class=n>636</td></tr><tr data-i="31" onclick="sel(31)" class=""><td class=r>32</td><td>Choapan</td><td class=n>18.9</td><td class=n>281</td></tr><tr data-i="32" onclick="sel(32)" class=""><td class=r>33</td><td>Michoacán</td><td class=n>18.8</td><td class=n>753</td></tr><tr data-i="33" onclick="sel(33)" class=""><td class=r>34</td><td>Foro Lindbergh</td><td class=n>18.5</td><td class=n>207</td></tr><tr data-i="34" onclick="sel(34)" class=""><td class=r>35</td><td>Teotihuacán</td><td class=n>18.5</td><td class=n>177</td></tr><tr data-i="35" onclick="sel(35)" class=""><td class=r>36</td><td>Ometusco</td><td class=n>18.2</td><td class=n>549</td></tr><tr data-i="36" onclick="sel(36)" class=""><td class=r>37</td><td>Altata</td><td class=n>17.9</td><td class=n>351</td></tr><tr data-i="37" onclick="sel(37)" class=""><td class=r>38</td><td>Sultepec</td><td class=n>17.9</td><td class=n>207</td></tr><tr data-i="38" onclick="sel(38)" class=""><td class=r>39</td><td>Av. Benjamín Franklin</td><td class=n>16.3</td><td class=n>956</td></tr><tr data-i="39" onclick="sel(39)" class=""><td class=r>40</td><td>Sindicalismo</td><td class=n>14.9</td><td class=n>198</td></tr><tr data-i="40" onclick="sel(40)" class=""><td class=r>41</td><td>Popocatépetl</td><td class=n>13.7</td><td class=n>491</td></tr><tr data-i="41" onclick="sel(41)" class=""><td class=r>42</td><td>Cacahuamilpa</td><td class=n>11.8</td><td class=n>178</td></tr></tbody></table></div>
-  <p class=nota>Da clic en cualquier calle para verla en el mapa. El score de una calle es el de
+  <p class=nota>Toca cualquier calle para verla en el mapa. El score de una calle es el de
   sus secciones, ponderado por los metros que corre en cada una.</p></div>
  <div><h2>Dónde se pide pavimentación</h2>
   <div class="caja scroll"><table id=tp><thead><tr><th>Calle</th><th class=n>Solic.</th>
