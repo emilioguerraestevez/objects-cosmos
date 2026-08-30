@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#D0181F">
+<title>Preinscripción · La Resistencia</title>
+<meta property="og:title" content="La Resistencia · Evento oficial mañana">
+<meta property="og:description" content="Lunes 31 de agosto, 6:30 pm, General Prim 30, Colonia Juárez. Confirma tu lugar.">
+<meta property="og:image" content="https://objects-cosmos.ai/resistencia/preview.jpg">
+<meta property="og:image:secure_url" content="https://objects-cosmos.ai/resistencia/preview.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://objects-cosmos.ai/resistencia/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="La Resistencia · Evento oficial mañana">
+<meta name="twitter:image" content="https://objects-cosmos.ai/resistencia/preview.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#D0181F; --red-deep:#9A1017; --ink:#141013; --yellow:#FCD108;
+    --orange:#F2921A; --cream:#F1E7D6; --teal:#1D6E63; --teal-deep:#134A43;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:radial-gradient(circle at 50% 0%, var(--red) 0%, var(--red-deep) 60%, #7c0d12 100%);
+    background-attachment:fixed;color:var(--ink);
+    font-family:'Barlow',-apple-system,'Helvetica Neue',Arial,sans-serif;
+    min-height:100vh;display:flex;justify-content:center;
+  }
+  #root{width:100%;max-width:560px;padding:34px 22px 46px}
+  .eyebrow{text-align:center;color:var(--yellow);font-weight:700;font-size:13px;letter-spacing:.42em;text-transform:uppercase}
+  .eyebrow .dot{display:inline-block;width:6px;height:6px;background:var(--yellow);border-radius:50%;margin:0 10px;position:relative;top:-2px}
+  h1{
+    font-family:'Anton',Impact,'Arial Black',sans-serif;font-weight:400;color:var(--yellow);
+    font-size:clamp(48px,13vw,72px);line-height:.86;text-align:center;letter-spacing:.01em;
+    margin:10px 0 4px;text-shadow:3px 3px 0 var(--ink);text-wrap:balance;
+  }
+  .sub{text-align:center;color:var(--cream);font-weight:600;font-size:16px;margin:0 0 22px;opacity:.92}
+  .emblem{width:196px;height:196px;margin:4px auto 22px;filter:drop-shadow(0 10px 14px rgba(0,0,0,.4))}
+  .emblem img{width:100%;height:100%;display:block;animation:flicker 3.2s ease-in-out infinite}
+  @media (prefers-reduced-motion: reduce){ .emblem img{animation:none} }
+  @keyframes flicker{0%,100%{transform:scale(1) rotate(0deg);filter:brightness(1)}50%{transform:scale(1.025) rotate(-.6deg);filter:brightness(1.06)}}
+  .tags{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:26px}
+  .tag{font-family:'Anton',Impact,sans-serif;font-weight:400;font-size:20px;letter-spacing:.01em;text-transform:uppercase;padding:10px 20px;box-shadow:0 5px 0 rgba(0,0,0,.18)}
+  .tag.a{background:var(--cream);color:var(--ink);transform:rotate(-1.4deg)}
+  .tag.b{background:var(--orange);color:var(--ink);transform:rotate(1.1deg)}
+  .tag.c{background:var(--teal);color:var(--cream);transform:rotate(-.8deg)}
+  .card{background:var(--cream);border-radius:4px;padding:26px 24px 22px;transform:rotate(-.5deg);box-shadow:0 14px 0 rgba(0,0,0,.15),0 18px 26px rgba(0,0,0,.35);position:relative}
+  .card::before{content:'';position:absolute;top:-9px;left:28px;width:54px;height:18px;background:var(--yellow);transform:rotate(-4deg);box-shadow:0 3px 0 rgba(0,0,0,.15)}
+  .card h2{font-family:'Anton',Impact,sans-serif;font-weight:400;font-size:26px;margin:6px 0 4px;letter-spacing:.01em}
+  .card p.hint{margin:0 0 18px;color:#4a4038;font-size:14px;font-weight:600;line-height:1.4}
+  label{display:block;font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--red-deep);margin-bottom:6px}
+  .field{margin-bottom:16px}
+  input{width:100%;font-family:'Barlow',sans-serif;font-weight:600;font-size:17px;padding:13px 14px;border:2px solid #DED0BB;border-radius:3px;background:#fff;color:var(--ink)}
+  input:focus{outline:none;border-color:var(--red)}
+  input::placeholder{color:#B7AC98;font-weight:600}
+  .err{color:var(--red-deep);font-size:13px;font-weight:700;margin-top:6px;display:none}
+  .field.invalid input{border-color:var(--red)}
+  .field.invalid .err{display:block}
+  button.cta{width:100%;margin-top:6px;font-family:'Anton',Impact,sans-serif;font-weight:400;font-size:22px;letter-spacing:.02em;text-transform:uppercase;color:var(--ink);background:var(--yellow);border:none;border-radius:3px;padding:16px 10px;cursor:pointer;box-shadow:0 5px 0 var(--orange)}
+  button.cta:active{transform:translateY(3px);box-shadow:0 2px 0 var(--orange)}
+  .privacy{margin-top:14px;padding-top:14px;border-top:1px solid #E0D3BB;text-align:center;font-size:12px;color:#6b6154;line-height:1.55;font-weight:600}
+  .confirmed{background:var(--cream);border-radius:4px;padding:30px 24px;text-align:center;transform:rotate(-.4deg);box-shadow:0 14px 0 rgba(0,0,0,.15),0 18px 26px rgba(0,0,0,.35);border-top:6px solid var(--teal)}
+  .confirmed .check{width:56px;height:56px;border-radius:50%;background:var(--teal);color:var(--cream);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:30px}
+  .confirmed h2{font-family:'Anton',Impact,sans-serif;font-weight:400;font-size:28px;margin:0 0 8px;text-wrap:balance}
+  .confirmed p{margin:0 0 4px;color:#3a332c;font-weight:600;line-height:1.5}
+  .confirmed .sig{margin-top:16px;font-weight:800;color:var(--teal-deep);letter-spacing:.03em}
+  .confirmed .privacy{border-top-color:#cfe3de}
+  .banner{margin-top:26px;background:var(--ink);text-align:center;padding:16px 10px;border-radius:3px}
+  .banner span{font-family:'Anton',Impact,sans-serif;font-weight:400;color:var(--yellow);font-size:22px;letter-spacing:.02em}
+  .footer{text-align:center;color:var(--cream);opacity:.85;font-weight:700;font-size:13px;margin-top:16px;letter-spacing:.03em}
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="eyebrow">PREINSCRIPCIÓN<span class="dot"></span>EVENTO OFICIAL</div>
+  <h1>LA<br>RESISTENCIA</h1>
+  <div class="sub">Confirma tu lugar para mañana</div>
+  <div class="emblem"><img src="emblem.png" alt="Emblema La Resistencia"></div>
+  <div class="tags">
+    <div class="tag a">Mañana lunes 31 de agosto</div>
+    <div class="tag b">6:30 pm</div>
+    <div class="tag c">General Prim 30 · Col. Juárez</div>
+  </div>
+
+  <form class="card" id="rsvpForm" novalidate>
+    <h2>Confirma tu lugar</h2>
+    <p class="hint">Déjanos tu nombre y tu número para tenerte en la lista de mañana.</p>
+    <div class="field" id="fNombre">
+      <label for="nombre">Nombre completo</label>
+      <input id="nombre" name="nombre" type="text" placeholder="¿Cómo te llamas?" autocomplete="name">
+      <div class="err">Escribe tu nombre.</div>
+    </div>
+    <div class="field" id="fTel">
+      <label for="telefono">Teléfono (10 dígitos)</label>
+      <input id="telefono" name="telefono" type="tel" inputmode="numeric" placeholder="55 1234 5678" autocomplete="tel">
+      <div class="err">Escribe un teléfono a 10 dígitos.</div>
+    </div>
+    <button class="cta" type="submit" id="submitBtn">Confirmar mi lugar 🔥</button>
+    <div class="privacy">Tus datos (nombre y teléfono) se usan <b>únicamente para organizar el evento de mañana</b>. No se comparten ni se usan para ningún otro fin.</div>
+  </form>
+
+  <div class="banner"><span>AQUÍ NADIE SE RINDE</span></div>
+  <div class="footer">— La Resistencia</div>
+</div>
+<script>
+(function(){
+  var form = document.getElementById('rsvpForm');
+  var root = document.getElementById('root');
+
+  function esc(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var nombreEl = document.getElementById('nombre');
+    var telEl = document.getElementById('telefono');
+    var nombre = nombreEl.value.trim();
+    var tel = telEl.value.replace(/\D/g,'');
+
+    var ok = true;
+    document.getElementById('fNombre').classList.toggle('invalid', nombre.length < 2);
+    if (nombre.length < 2) ok = false;
+    document.getElementById('fTel').classList.toggle('invalid', tel.length !== 10);
+    if (tel.length !== 10) ok = false;
+    if (!ok) return;
+
+    var subject = encodeURIComponent('Confirmación La Resistencia — evento 31 de agosto');
+    var body = encodeURIComponent('Nombre: ' + nombre + '\nTeléfono: ' + tel + '\n\nConfirmo mi asistencia al evento de mañana lunes 31 de agosto, 6:30 pm, General Prim 30, Colonia Juárez.');
+    var mailto = 'mailto:emilio@cxsmxs.tech?subject=' + subject + '&body=' + body;
+
+    try{ localStorage.setItem('resistencia_confirmado', JSON.stringify({nombre:nombre, telefono:tel})); }catch(e){}
+
+    window.location.href = mailto;
+
+    var firstName = nombre.split(' ')[0];
+    root.innerHTML =
+      '<div class="eyebrow">PREINSCRIPCIÓN<span class="dot"></span>EVENTO OFICIAL</div>' +
+      '<h1>LA<br>RESISTENCIA</h1>' +
+      '<div class="sub">Confirma tu lugar para mañana</div>' +
+      '<div class="emblem"><img src="emblem.png" alt="Emblema La Resistencia"></div>' +
+      '<div class="tags">' +
+        '<div class="tag a">Mañana lunes 31 de agosto</div>' +
+        '<div class="tag b">6:30 pm</div>' +
+        '<div class="tag c">General Prim 30 · Col. Juárez</div>' +
+      '</div>' +
+      '<div class="confirmed">' +
+        '<div class="check">✓</div>' +
+        '<h2>¡Va, ' + esc(firstName) + '!</h2>' +
+        '<p>Se abrió tu correo para mandar tu confirmación — nada más dale enviar.</p>' +
+        '<p><b>Lunes 31 de agosto · 6:30 pm</b><br>General Prim 30, Colonia Juárez</p>' +
+        '<div class="sig">Aquí nadie se rinde. Nos vemos mañana.</div>' +
+        '<div class="privacy">Tus datos se usan únicamente para organizar el evento de mañana.</div>' +
+      '</div>' +
+      '<div class="banner"><span>AQUÍ NADIE SE RINDE</span></div>' +
+      '<div class="footer">— La Resistencia</div>';
+  });
+
+  (function(){
+    try{
+      var raw = localStorage.getItem('resistencia_confirmado');
+      if (!raw) return;
+      var mine = JSON.parse(raw);
+      var firstName = mine.nombre.split(' ')[0];
+      root.innerHTML =
+        '<div class="eyebrow">PREINSCRIPCIÓN<span class="dot"></span>EVENTO OFICIAL</div>' +
+        '<h1>LA<br>RESISTENCIA</h1>' +
+        '<div class="sub">Confirma tu lugar para mañana</div>' +
+        '<div class="emblem"><img src="emblem.png" alt="Emblema La Resistencia"></div>' +
+        '<div class="tags">' +
+          '<div class="tag a">Mañana lunes 31 de agosto</div>' +
+          '<div class="tag b">6:30 pm</div>' +
+          '<div class="tag c">General Prim 30 · Col. Juárez</div>' +
+        '</div>' +
+        '<div class="confirmed">' +
+          '<div class="check">✓</div>' +
+          '<h2>¡Ya estás, ' + esc(firstName) + '!</h2>' +
+          '<p>Ya habías confirmado desde este teléfono.</p>' +
+          '<p><b>Lunes 31 de agosto · 6:30 pm</b><br>General Prim 30, Colonia Juárez</p>' +
+          '<div class="sig">Aquí nadie se rinde. Nos vemos mañana.</div>' +
+        '</div>' +
+        '<div class="banner"><span>AQUÍ NADIE SE RINDE</span></div>' +
+        '<div class="footer">— La Resistencia</div>';
+    }catch(e){}
+  })();
+})();
+</script>
+</body>
+</html>
