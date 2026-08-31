@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#141013">
+<title>Registro en puerta · La Resistencia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#D0181F; --red-deep:#9A1017; --ink:#141013; --yellow:#FCD108;
+    --orange:#F2921A; --cream:#F1E7D6; --teal:#1D6E63;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--ink); color:var(--cream);
+    font-family:'Barlow',-apple-system,'Helvetica Neue',Arial,sans-serif;
+    min-height:100vh; display:flex; justify-content:center;
+  }
+  #wrap{width:100%;max-width:520px;padding:28px 22px 40px;display:flex;flex-direction:column;min-height:100vh}
+
+  .top{display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid #2a2624;padding-bottom:14px}
+  .brand{font-family:'Anton',Impact,sans-serif;font-weight:400;color:var(--yellow);font-size:22px;letter-spacing:.01em}
+  .brand span{color:var(--cream)}
+  .counter{font-size:13px;font-weight:700;color:var(--cream);opacity:.75;text-align:right}
+  .counter b{color:var(--yellow);font-variant-numeric:tabular-nums;font-size:16px}
+
+  h1{font-family:'Anton',Impact,sans-serif;font-weight:400;font-size:30px;color:var(--cream);margin:26px 0 4px;text-transform:uppercase;letter-spacing:.01em}
+  .sub{color:#B8AFA4;font-size:14px;margin:0 0 22px;font-weight:600}
+
+  label{display:block;font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--yellow);margin-bottom:7px}
+  .field{margin-bottom:18px}
+  input{
+    width:100%;font-family:'Barlow',sans-serif;font-weight:700;font-size:20px;
+    padding:16px 15px;border:2px solid #3a3532;border-radius:4px;background:#1e1a18;color:var(--cream);
+  }
+  input:focus{outline:none;border-color:var(--yellow)}
+  input::placeholder{color:#6b6259;font-weight:600}
+  .field.invalid input{border-color:var(--red)}
+  .err{color:#ff6b6f;font-size:13px;font-weight:700;margin-top:6px;display:none}
+  .field.invalid .err{display:block}
+
+  button.cta{
+    width:100%;margin-top:8px;font-family:'Anton',Impact,sans-serif;font-weight:400;font-size:24px;letter-spacing:.02em;
+    text-transform:uppercase;color:var(--ink);background:var(--yellow);border:none;border-radius:4px;
+    padding:19px 10px;cursor:pointer;box-shadow:0 5px 0 var(--orange);
+  }
+  button.cta:active{transform:translateY(3px);box-shadow:0 2px 0 var(--orange)}
+
+  .toast{
+    margin-top:16px;padding:14px 16px;border-radius:4px;background:var(--teal);color:var(--cream);
+    font-weight:800;text-align:center;font-size:16px;opacity:0;transform:translateY(-6px);
+    transition:opacity .18s ease, transform .18s ease;
+  }
+  .toast.show{opacity:1;transform:translateY(0)}
+  .toast.err{background:var(--red-deep)}
+
+  .foot{margin-top:auto;padding-top:24px;text-align:center;color:#6b6259;font-size:12px;font-weight:600}
+</style>
+</head>
+<body>
+<div id="wrap">
+  <div class="top">
+    <div class="brand">LA <span>RESISTENCIA</span></div>
+    <div class="counter">EN ESTE DISPOSITIVO<br><b id="count">0</b> registrados</div>
+  </div>
+
+  <h1>Registro en puerta</h1>
+  <div class="sub">Aniversario · 31 de agosto · General Prim 30, Col. Juárez</div>
+
+  <form id="doorForm" novalidate>
+    <div class="field" id="fNombre">
+      <label for="nombre">Nombre completo</label>
+      <input id="nombre" name="nombre" type="text" placeholder="Nombre de la persona" autocomplete="off">
+      <div class="err">Escribe el nombre.</div>
+    </div>
+    <div class="field" id="fTel">
+      <label for="telefono">Teléfono (10 dígitos)</label>
+      <input id="telefono" name="telefono" type="tel" inputmode="numeric" placeholder="55 1234 5678" autocomplete="off">
+      <div class="err">Escribe un teléfono a 10 dígitos.</div>
+    </div>
+    <button class="cta" type="submit">Registrar y siguiente</button>
+  </form>
+
+  <div class="toast" id="toast"></div>
+
+  <div class="foot">Uso interno de staff — objects-cosmos.ai/resistencia/puerta</div>
+</div>
+<script>
+(function(){
+  var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwAv9wyIdtMkDP5g4wCUE-WcWbrTIRk1LzIgZp2uT2Z9lBwulKJnN6g7bLHFZYFZEAlJQ/exec';
+  var form = document.getElementById('doorForm');
+  var nombreEl = document.getElementById('nombre');
+  var telEl = document.getElementById('telefono');
+  var toast = document.getElementById('toast');
+  var countEl = document.getElementById('count');
+  var count = 0;
+  var toastTimer = null;
+
+  function showToast(msg, isErr){
+    toast.textContent = msg;
+    toast.className = 'toast show' + (isErr ? ' err' : '');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toast.className = 'toast'; }, 2200);
+  }
+
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var nombre = nombreEl.value.trim();
+    var tel = telEl.value.replace(/\D/g,'');
+
+    var ok = true;
+    document.getElementById('fNombre').classList.toggle('invalid', nombre.length < 2);
+    if (nombre.length < 2) ok = false;
+    document.getElementById('fTel').classList.toggle('invalid', tel.length !== 10);
+    if (tel.length !== 10) ok = false;
+    if (!ok) return;
+
+    fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {'Content-Type':'application/x-www-form-urlencoded'},
+      body: 'nombre=' + encodeURIComponent(nombre) + '&telefono=' + encodeURIComponent(tel)
+    }).then(function(){
+      count++;
+      countEl.textContent = count;
+      showToast('✓ Registrado — ' + nombre.split(' ')[0]);
+    }).catch(function(){
+      showToast('Sin conexión — anótalo a mano y reintenta luego', true);
+    });
+
+    form.reset();
+    nombreEl.focus();
+  });
+})();
+</script>
+</body>
+</html>
