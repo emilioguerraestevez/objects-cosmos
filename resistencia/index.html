@@ -149,6 +149,13 @@
           body: 'nombre=' + encodeURIComponent(nombre) + '&telefono=' + encodeURIComponent(tel)
         });
       }catch(e){}
+    } else {
+      // Red de seguridad temporal: mientras no haya Sheet conectado, el
+      // registro cae por correo para no perder gente. Quitar cuando
+      // APPS_SCRIPT_URL quede funcionando.
+      var subject = encodeURIComponent('Confirmación La Resistencia — Aniversario 31 de agosto');
+      var body = encodeURIComponent('Nombre: ' + nombre + '\nTeléfono: ' + tel);
+      window.location.href = 'mailto:emilio@cxsmxs.tech?subject=' + subject + '&body=' + body;
     }
 
     var firstName = nombre.split(' ')[0];
@@ -165,7 +172,7 @@
       '<div class="confirmed">' +
         '<div class="check">✓</div>' +
         '<h2>¡Va, ' + esc(firstName) + '!</h2>' +
-        '<p>Quedaste registrado. Un año después, aquí seguimos.</p>' +
+        '<p>Se abrió tu correo con tu confirmación — nada más dale enviar.</p>' +
         '<p><b>Lunes 31 de agosto · 6:30 pm</b><br>General Prim 30, Colonia Juárez</p>' +
         '<div class="sig">Aquí nadie se rinde. Nos vemos mañana.</div>' +
         '<div class="privacy">Tus datos se usan únicamente para organizar el evento de mañana.</div>' +
