@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#0d0c0a">
+<title>Repositorio de Invitados posterior al Corte 3:30pm</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Cinzel:wght@500;600;700&family=Barlow:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gold:#D9B36C; --gold-lt:#EAD9AE; --red:#8E2A2A; --red-deep:#6B1616;
+    --green:#1E4635; --ink:#0d0c0a; --panel:#171410;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:
+      radial-gradient(ellipse at 50% -10%, rgba(142,42,42,.25), transparent 55%),
+      var(--ink);
+    color:var(--gold-lt);
+    font-family:'Barlow',-apple-system,'Helvetica Neue',Arial,sans-serif;
+    min-height:100vh; display:flex; justify-content:center;
+  }
+  #wrap{width:100%;max-width:560px;padding:30px 22px 34px;display:flex;flex-direction:column;min-height:100vh}
+
+  .top{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #3a2f1e;padding-bottom:14px}
+  .brand{font-family:'Cinzel',serif;font-weight:600;color:var(--gold);font-size:14px;letter-spacing:.14em;text-transform:uppercase}
+  .brand span{color:var(--red);opacity:.95}
+  .counter{font-size:12px;font-weight:700;color:var(--gold-lt);opacity:.7;text-align:right;font-family:'Cinzel',serif;letter-spacing:.04em}
+  .counter b{color:var(--red);font-variant-numeric:tabular-nums;font-size:16px;font-family:'Barlow',sans-serif}
+
+  .sparks{text-align:center;color:var(--gold);opacity:.75;font-size:15px;letter-spacing:.5em;margin:22px 0 6px;padding-left:.5em}
+
+  h1{
+    font-family:'Rye',cursive; font-weight:400; text-transform:uppercase;
+    font-size:32px; line-height:1.15; text-align:center; margin:6px 0 2px;
+    color:var(--red); text-shadow:0 1px 0 #c98f4a, 0 2px 6px rgba(0,0,0,.6);
+    letter-spacing:.01em;
+  }
+  h1 .oro{color:var(--gold-lt); text-shadow:0 1px 0 var(--green), 0 2px 6px rgba(0,0,0,.6);}
+  .sub{color:#b8a888;font-size:13.5px;margin:2px 0 10px;font-weight:600;text-align:center;
+    font-family:'Cinzel',serif;letter-spacing:.03em}
+  .avisо, .aviso{
+    background:rgba(142,42,42,.18); border:1px solid var(--red-deep); border-radius:4px;
+    padding:12px 14px; margin:6px 0 24px; font-size:12.5px; line-height:1.55; color:var(--gold-lt);
+    text-align:center;
+  }
+  .aviso b{color:var(--gold)}
+
+  label{display:block;font-family:'Cinzel',serif;font-weight:600;font-size:11.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--gold);margin-bottom:7px}
+  label .req{color:var(--red);margin-left:3px}
+  .field{margin-bottom:18px}
+  input, select{
+    width:100%;font-family:'Barlow',sans-serif;font-weight:700;font-size:18px;
+    padding:14px 15px;border:1.5px solid #4a3a22;border-radius:3px;background:var(--panel);color:var(--gold-lt);
+    appearance:none;-webkit-appearance:none;
+  }
+  select{
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath fill='%23D9B36C' d='M0 0l7 9 7-9z'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 16px center; padding-right:40px;
+  }
+  input:focus, select:focus{outline:none;border-color:var(--gold)}
+  input::placeholder{color:#6b5c42;font-weight:600}
+  select:invalid{color:#6b5c42}
+  option{background:var(--panel);color:var(--gold-lt)}
+
+  .field.invalid input, .field.invalid select{border-color:var(--red)}
+  .err{color:#e58a8a;font-size:12.5px;font-weight:700;margin-top:6px;display:none;font-family:'Cinzel',serif}
+  .field.invalid .err{display:block}
+
+  .toggle-row{
+    display:flex;align-items:center;gap:12px;background:var(--panel);border:1.5px solid #4a3a22;
+    border-radius:3px;padding:13px 15px;margin-bottom:4px;cursor:pointer;user-select:none;
+  }
+  .toggle-row input[type=checkbox]{width:auto;padding:0;margin:0;accent-color:var(--gold);
+    width:20px;height:20px;flex:none;cursor:pointer}
+  .toggle-row span{font-family:'Cinzel',serif;font-weight:600;font-size:12.5px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--gold-lt)}
+
+  #parking{display:none;margin-top:14px;padding:14px;border:1px dashed #4a3a22;border-radius:4px}
+  #parking.show{display:block}
+
+  button.cta{
+    width:100%;margin-top:14px;font-family:'Rye',cursive;font-weight:400;font-size:21px;letter-spacing:.03em;
+    text-transform:uppercase;color:#241205;
+    background:linear-gradient(180deg,var(--gold-lt),var(--gold));
+    border:1px solid #8a6a2e;border-radius:3px;
+    padding:16px 10px;cursor:pointer;box-shadow:0 5px 0 var(--red-deep);
+    transition:opacity .15s ease;
+  }
+  button.cta:active{transform:translateY(3px);box-shadow:0 2px 0 var(--red-deep)}
+  button.cta:disabled{opacity:.4;cursor:not-allowed;box-shadow:0 5px 0 #3a2f1e}
+  button.cta:disabled:active{transform:none}
+  .cta-hint{text-align:center;font-size:11.5px;color:#8a7a5c;margin-top:8px;font-family:'Cinzel',serif;letter-spacing:.03em}
+
+  .toast{
+    margin-top:16px;padding:13px 16px;border-radius:3px;background:var(--green);color:var(--gold-lt);
+    font-weight:700;text-align:center;font-size:15px;opacity:0;transform:translateY(-6px);
+    transition:opacity .18s ease, transform .18s ease;border:1px solid #2f5c47;
+  }
+  .toast.show{opacity:1;transform:translateY(0)}
+  .toast.err{background:var(--red-deep);border-color:#8a2f2f}
+
+  .foot{margin-top:auto;padding-top:26px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .foot .wordmark{font-family:'Cinzel',serif;font-weight:600;font-size:12px;letter-spacing:.16em;color:var(--gold);text-transform:uppercase}
+  .foot .url{color:#5c4f3a;font-size:11px;font-weight:600;margin-top:2px}
+</style>
+</head>
+<body>
+<div id="wrap">
+  <div class="top">
+    <div class="brand">REPOSITORIO · <span>15 SEPT</span></div>
+    <div class="counter">EN ESTE DISPOSITIVO<br><b id="count">0</b> capturados</div>
+  </div>
+
+  <div class="sparks">✦ ✧ ✦</div>
+  <h1>Repositorio <span class="oro">de invitados</span></h1>
+  <div class="sub">Posterior al corte de 3:30&nbsp;pm · Alcaldía Cuauhtémoc</div>
+  <div class="aviso">Vierte aquí a los invitados que agregues <b>después del corte de 3:30&nbsp;pm</b>. No los mandes por WhatsApp — todo debe quedar registrado en este link.</div>
+
+  <form id="repoForm" novalidate>
+    <div class="field" id="fNombre">
+      <label for="nombre">Nombre del invitado</label>
+      <input id="nombre" name="nombre" type="text" placeholder="Nombre completo" autocomplete="off">
+      <div class="err">Escribe el nombre del invitado.</div>
+    </div>
+
+    <div class="field" id="fProcedencia">
+      <label for="procedencia">Procedencia</label>
+      <input id="procedencia" name="procedencia" type="text" placeholder="¿De dónde viene / a qué representa?" autocomplete="off">
+      <div class="err">Escribe la procedencia.</div>
+    </div>
+
+    <div class="field" id="fReferencia">
+      <label for="referencia">Nombre de referencia <span class="req">(obligatorio)</span></label>
+      <select id="referencia" name="referencia" required>
+        <option value="" disabled selected>Selecciona quién lo invita…</option>
+        <option>Obdulio Ávila</option>
+        <option>Carmen Molina</option>
+        <option>Óscar Espitia</option>
+        <option>Verónica Juárez</option>
+        <option>Mónica Montes</option>
+        <option>Lilian Chapa</option>
+        <option>Mariana Gálvez</option>
+        <option>Vianeth Violante</option>
+        <option>Érika Rodríguez</option>
+        <option>Jorge Roldán</option>
+        <option>Mauricio González</option>
+        <option>Mariana Rodríguez Mier y Terán</option>
+        <option>Déborah Romero</option>
+        <option>Inbal Miller</option>
+      </select>
+      <div class="err">Sin nombre de referencia no se puede subir el formulario.</div>
+    </div>
+
+    <div class="field" id="fPlusones">
+      <label for="plusones" style="font-family:'Barlow',sans-serif;font-weight:800">¿TRAE ACOMPAÑANTES?</label>
+      <select id="plusones" name="plusones">
+        <option value="0">Sin acompañantes</option>
+        <option value="1">+1</option>
+        <option value="2">+2</option>
+        <option value="3">+3</option>
+        <option value="4">+4</option>
+      </select>
+    </div>
+
+    <label class="toggle-row" for="estaciona">
+      <input type="checkbox" id="estaciona" name="estaciona">
+      <span>¿Requiere tarjetón de estacionamiento?</span>
+    </label>
+
+    <div id="parking">
+      <div class="field" id="fModelo">
+        <label for="modelo">Modelo de automóvil</label>
+        <input id="modelo" name="modelo" type="text" placeholder="Ej. Nissan Versa gris" autocomplete="off">
+        <div class="err">Escribe el modelo del automóvil.</div>
+      </div>
+      <div class="field" id="fPlacas">
+        <label for="placas">Placas</label>
+        <input id="placas" name="placas" type="text" placeholder="Ej. ABC-123-D" autocomplete="off" style="text-transform:uppercase">
+        <div class="err">Escribe las placas.</div>
+      </div>
+    </div>
+
+    <button class="cta" type="submit" id="btnEnviar" disabled>Enviar al repositorio</button>
+    <div class="cta-hint" id="hint">Selecciona el nombre de referencia para poder enviar</div>
+  </form>
+
+  <div class="toast" id="toast"></div>
+
+  <div class="foot">
+    <div class="wordmark">Alcaldía Cuauhtémoc</div>
+    <div class="url">objects-cosmos.ai/repositorio15sept · uso interno</div>
+  </div>
+</div>
+<script>
+(function(){
+  var APPS_SCRIPT_URL = 'REEMPLAZAR_CON_URL_DE_APPS_SCRIPT';
+
+  var form = document.getElementById('repoForm');
+  var nombreEl = document.getElementById('nombre');
+  var procedenciaEl = document.getElementById('procedencia');
+  var referenciaEl = document.getElementById('referencia');
+  var plusonesEl = document.getElementById('plusones');
+  var estacionaEl = document.getElementById('estaciona');
+  var modeloEl = document.getElementById('modelo');
+  var placasEl = document.getElementById('placas');
+  var parkingBox = document.getElementById('parking');
+  var btnEnviar = document.getElementById('btnEnviar');
+  var hint = document.getElementById('hint');
+  var toast = document.getElementById('toast');
+  var countEl = document.getElementById('count');
+  var count = 0;
+  var toastTimer = null;
+
+  function actualizarBoton(){
+    var ok = !!referenciaEl.value;
+    btnEnviar.disabled = !ok;
+    hint.style.display = ok ? 'none' : 'block';
+  }
+  referenciaEl.addEventListener('change', actualizarBoton);
+  actualizarBoton();
+
+  estacionaEl.addEventListener('change', function(){
+    parkingBox.classList.toggle('show', estacionaEl.checked);
+  });
+
+  function showToast(msg, isErr){
+    toast.textContent = msg;
+    toast.className = 'toast show' + (isErr ? ' err' : '');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toast.className = 'toast'; }, 2400);
+  }
+
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+
+    var nombre = nombreEl.value.trim();
+    var procedencia = procedenciaEl.value.trim();
+    var referencia = referenciaEl.value;
+    var plusones = plusonesEl.value;
+    var estaciona = estacionaEl.checked;
+    var modelo = modeloEl.value.trim();
+    var placas = placasEl.value.trim();
+
+    var ok = true;
+    document.getElementById('fNombre').classList.toggle('invalid', nombre.length < 2);
+    if (nombre.length < 2) ok = false;
+    document.getElementById('fProcedencia').classList.toggle('invalid', procedencia.length < 2);
+    if (procedencia.length < 2) ok = false;
+    document.getElementById('fReferencia').classList.toggle('invalid', !referencia);
+    if (!referencia) ok = false;
+    if (estaciona){
+      document.getElementById('fModelo').classList.toggle('invalid', modelo.length < 2);
+      if (modelo.length < 2) ok = false;
+      document.getElementById('fPlacas').classList.toggle('invalid', placas.length < 2);
+      if (placas.length < 2) ok = false;
+    } else {
+      document.getElementById('fModelo').classList.remove('invalid');
+      document.getElementById('fPlacas').classList.remove('invalid');
+    }
+    if (!ok){
+      showToast('Falta completar algo — revisa en rojo', true);
+      return;
+    }
+
+    fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {'Content-Type':'application/x-www-form-urlencoded'},
+      body: 'nombre=' + encodeURIComponent(nombre)
+        + '&procedencia=' + encodeURIComponent(procedencia)
+        + '&referencia=' + encodeURIComponent(referencia)
+        + '&plusones=' + encodeURIComponent(plusones)
+        + '&estaciona=' + encodeURIComponent(estaciona ? 'SI' : 'NO')
+        + '&modelo=' + encodeURIComponent(estaciona ? modelo : '')
+        + '&placas=' + encodeURIComponent(estaciona ? placas : '')
+    }).then(function(){
+      count++;
+      countEl.textContent = count;
+      showToast('✓ Capturado — ' + nombre.split(' ')[0]);
+    }).catch(function(){
+      showToast('Sin conexión — anótalo a mano y reintenta luego', true);
+    });
+
+    form.reset();
+    parkingBox.classList.remove('show');
+    actualizarBoton();
+    nombreEl.focus();
+  });
+})();
+</script>
+</body>
+</html>
