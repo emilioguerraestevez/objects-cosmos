@@ -1,5 +1,15 @@
 <meta charset="utf-8">
-<title>Metepec 2027 · Primer drop · constelar</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#101113">
+<title>constelar · estudio preliminar</title>
+<meta property="og:title" content="constelar · estudio preliminar">
+<meta property="og:description" content="Documento confidencial · acceso restringido.">
+<meta property="og:image" content="https://objects-cosmos.ai/constelar/jrm01/thumbnail.png">
+<meta property="og:url" content="https://objects-cosmos.ai/constelar/jrm01/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://objects-cosmos.ai/constelar/jrm01/thumbnail.png">
 <style>
 :root{
   --papel:#f7f4ee; --papel2:#fffefb; --tinta:#1a1917; --tinta2:#4a4740;
@@ -770,13 +780,11 @@ async function intentaEntrarG() {
     refrescaG();
     return;
   }
-  localStorage.setItem('constelar_jrm01_user', usu);
   document.getElementById('compuerta').classList.add('oculta');
 }
 btnG.addEventListener('click', intentaEntrarG);
 campoClave.addEventListener('keydown', ev => { if (ev.key === 'Enter') intentaEntrarG(); });
 campoUsuario.addEventListener('keydown', ev => { if (ev.key === 'Enter') campoClave.focus(); });
-if (localStorage.getItem('constelar_jrm01_user')) {
-  document.getElementById('compuerta').classList.add('oculta');
-}
+// A propósito SIN localStorage: es información clasificada, pide usuario y
+// clave cada vez que se abre, sin "recordarme" entre recargas ni visitas.
 </script>
