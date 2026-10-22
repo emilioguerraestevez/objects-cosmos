@@ -1,4 +1,4 @@
-// Registro Simposio · Cátedra de Ciudades (12-13 nov 2026)
+// Registro Simposio · Cátedra de Ciudades (12 nov 2026)
 // Pegar en un Apps Script ligado a un Google Sheet nuevo → Implementar → Aplicación web
 // (Ejecutar como: Yo · Acceso: Cualquiera) → copiar la URL /exec en APPS_SCRIPT_URL de index.html.
 function doPost(e) {
