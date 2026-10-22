@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Registro · Simposio Cátedra de Ciudades</title>
+<meta name="description" content="Registro al simposio Cátedra de Ciudades: Arquitectura de la ciudad, presente y futuro. 12 y 13 de noviembre, Torre Reforma.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0e0f0e;--paper:#f2f2ee;--mute:#a9aca7;--neon:#39ff2b;--line:rgba(255,255,255,.18);--err:#ff7a6b}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--ink);color:var(--paper);font-family:Barlow,system-ui,sans-serif;min-height:100vh;
+  background-image:radial-gradient(ellipse at 20% -10%,#3a3d3a 0,transparent 55%),radial-gradient(ellipse at 90% 40%,#262826 0,transparent 60%);
+  padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);position:relative;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.10;mix-blend-mode:screen;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.diag{position:fixed;top:-5vh;bottom:-5vh;right:12vw;width:2px;background:var(--neon);transform:rotate(11deg);transform-origin:top;opacity:.85;pointer-events:none}
+.wrap{position:relative;max-width:520px;margin:0 auto;padding:0 20px 36px}
+.brand{padding:26px 0 8px;display:flex;align-items:center;gap:18px}
+.brand .alc{height:96px;width:auto}
+.brand .ibero{height:40px;width:auto;margin-left:auto}
+h1{font-family:"Barlow Condensed",sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.01em;line-height:.92;font-size:clamp(46px,15vw,72px);margin:26px 0 22px}
+.disc{width:min(74vw,290px);aspect-ratio:1;border-radius:50%;background:var(--neon);color:#0a0a0a;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;margin:0 auto 24px;font-family:"Barlow Condensed",sans-serif;line-height:1;padding:18px}
+.disc b{font-weight:700;font-size:clamp(30px,10vw,40px)}
+.disc span{font-weight:500;font-size:clamp(24px,8vw,32px)}
+.disc em{font-style:normal;font-weight:700}
+.when{text-align:center;font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;margin-bottom:26px}
+.when .d{font-size:clamp(26px,8.4vw,34px);font-weight:700;letter-spacing:.02em}
+.when .s{font-size:20px;font-weight:600;margin-top:2px}
+.when .t{font-size:17px;font-weight:500;color:var(--mute);letter-spacing:.04em;margin-top:2px}
+form{background:rgba(14,15,14,.72);border:1px solid var(--line);border-radius:14px;padding:20px 18px 18px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+form h2{font-family:"Barlow Condensed",sans-serif;font-size:24px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:14px}
+label{display:block;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin:14px 0 6px}
+label i{font-style:normal;font-weight:400;text-transform:none;letter-spacing:0}
+input[type=text],input[type=email],input[type=tel]{width:100%;font:inherit;font-size:16px;color:var(--paper);background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:10px;padding:13px 14px;outline:none;-webkit-appearance:none;appearance:none}
+input:focus{border-color:var(--neon);box-shadow:0 0 0 3px rgba(57,255,43,.2)}
+.mod{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mod label{margin:0;text-transform:none;letter-spacing:0;font-size:16px;font-weight:500;color:var(--paper);cursor:pointer}
+.mod input{position:absolute;opacity:0;pointer-events:none}
+.mod span{display:block;text-align:center;padding:13px 8px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.07)}
+.mod input:checked+span{background:var(--neon);color:#0a0a0a;border-color:var(--neon);font-weight:600}
+.mod input:focus-visible+span{box-shadow:0 0 0 3px rgba(57,255,43,.35)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+button{margin-top:20px;width:100%;font-family:"Barlow Condensed",sans-serif;font-size:24px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#0a0a0a;background:var(--neon);border:0;border-radius:999px;padding:15px;cursor:pointer;-webkit-appearance:none}
+button:disabled{opacity:.55;cursor:default}
+.note{font-size:12.5px;color:var(--mute);line-height:1.45;margin-top:12px}
+.msg{margin-top:12px;font-size:14px;color:var(--err);min-height:0}
+.ok{display:none;text-align:center;padding:34px 10px 26px}
+.ok .tick{width:64px;height:64px;border-radius:50%;background:var(--neon);color:#0a0a0a;font-size:38px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.ok h2{font-size:34px;line-height:1}
+.ok p{color:var(--mute);margin-top:10px;font-size:16px;line-height:1.45}
+.ok p b{color:var(--paper)}
+footer{margin-top:34px;text-align:center;border-top:1px solid var(--line);padding-top:22px}
+footer p{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:10px}
+footer img{height:34px;width:auto;opacity:.95}
+</style>
+</head>
+<body>
+<div class="diag" aria-hidden="true"></div>
+<div class="wrap">
+  <div class="brand">
+    <img class="alc" src="alcaldia.png" alt="Alcaldía Cuauhtémoc">
+    <img class="ibero" src="ibero.png" alt="IBERO Ciudad de México · Arquitectura, Urbanismo e Ingeniería Civil">
+  </div>
+
+  <h1>Cátedra<br>de Ciudades</h1>
+
+  <div class="disc" role="img" aria-label="Arquitectura de la ciudad, presente y futuro">
+    <b>arquitectura</b><span>de la</span><b>ciudad</b><span>presente</span><span>y <em>futuro</em></span>
+  </div>
+
+  <div class="when">
+    <div class="d">Simposio 12 y 13 noviembre</div>
+    <div class="s">Torre Reforma</div>
+    <div class="t">Transmisión en vivo</div>
+  </div>
+
+  <form id="f" novalidate>
+    <div id="formBody">
+      <h2>Regístrate</h2>
+      <label for="nombre">Nombre completo</label>
+      <input id="nombre" name="nombre" type="text" autocomplete="name" required maxlength="120">
+      <label for="correo">Correo electrónico</label>
+      <input id="correo" name="correo" type="email" autocomplete="email" inputmode="email" required maxlength="120">
+      <label for="tel">Teléfono celular <i>(10 dígitos)</i></label>
+      <input id="tel" name="telefono" type="tel" autocomplete="tel-national" inputmode="numeric" required maxlength="20">
+      <label for="org">Institución u organización <i>(opcional)</i></label>
+      <input id="org" name="organizacion" type="text" autocomplete="organization" maxlength="120">
+      <label>¿Cómo vas a asistir?</label>
+      <div class="mod">
+        <label><input type="radio" name="modalidad" value="Presencial" checked><span>Presencial</span></label>
+        <label><input type="radio" name="modalidad" value="En línea"><span>En línea</span></label>
+      </div>
+      <div class="hp" aria-hidden="true"><label>No llenar<input type="text" name="web" tabindex="-1" autocomplete="off"></label></div>
+      <button id="go" type="submit">Confirmar registro</button>
+      <div class="msg" id="msg" role="alert"></div>
+      <p class="note">Tus datos se usan únicamente para confirmar tu asistencia y enviarte información del simposio.</p>
+    </div>
+    <div class="ok" id="ok" role="status">
+      <div class="tick">✓</div>
+      <h2>Registro confirmado</h2>
+      <p>Gracias, <b id="okName"></b>.<br>Te esperamos el <b>12 y 13 de noviembre</b>.</p>
+    </div>
+  </form>
+
+  <footer>
+    <p>technology partner: cosmos.ai</p>
+    <img src="cosmos_blanco.png" alt="cosmos.ai">
+  </footer>
+</div>
+
+<script>
+(function(){
+  // URL del Web App de Google Apps Script (ver apps_script.gs). Vacío = registro NO disponible.
+  var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyv7ieh_ybC4KmmWpa5JusUCkq8sqQ1XU0E0sDqDmy5LHMhofXcDhMxUrGslZwZ_FbjvQ/exec';
+  var f=document.getElementById('f'), msg=document.getElementById('msg'), go=document.getElementById('go');
+  function say(t){ msg.textContent=t||''; }
+  f.addEventListener('submit',function(e){
+    e.preventDefault(); say('');
+    var d=new FormData(f);
+    if(d.get('web')) return;                       // honeypot
+    var nombre=(d.get('nombre')||'').trim(), correo=(d.get('correo')||'').trim(),
+        tel=(d.get('telefono')||'').replace(/\D/g,'');
+    if(tel.length===12 && tel.indexOf('52')===0) tel=tel.slice(2);
+    if(tel.length===13 && tel.indexOf('521')===0) tel=tel.slice(3);
+    if(nombre.split(/\s+/).filter(Boolean).length<2){ say('Escribe tu nombre completo.'); return; }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(correo)){ say('Revisa tu correo electrónico.'); return; }
+    if(tel.length!==10){ say('El teléfono debe tener 10 dígitos.'); return; }
+    if(!APPS_SCRIPT_URL){ say('El registro aún no está disponible. Inténtalo más tarde.'); return; }
+    go.disabled=true; go.textContent='Enviando…';
+    var body=new URLSearchParams({nombre:nombre,correo:correo,telefono:tel,
+      organizacion:(d.get('organizacion')||'').trim(),modalidad:d.get('modalidad')||'',origen:'registro_simposio'});
+    fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',body:body})
+      .then(function(){ done(nombre); })
+      .catch(function(){ go.disabled=false; go.textContent='Confirmar registro'; say('No pudimos enviar tu registro. Revisa tu conexión e inténtalo de nuevo.'); });
+  });
+  function done(n){
+    document.getElementById('okName').textContent=n.split(/\s+/)[0];
+    document.getElementById('formBody').style.display='none';
+    document.getElementById('ok').style.display='block';
+  }
+})();
+</script>
+</body>
+</html>
