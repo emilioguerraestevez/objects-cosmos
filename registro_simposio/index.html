@@ -184,6 +184,7 @@ footer img{height:11px;width:auto;opacity:.9}
       <div class="tick">✓</div>
       <h2>Registro confirmado</h2>
       <p>Gracias, <b id="okName"></b>.<br>Te esperamos el <b>12 de noviembre</b>.<br>Abajo está el programa: elige los horarios a los que quieres asistir.</p>
+      <p class="again"><a href="#" id="otra">No soy yo · registrar a otra persona</a></p>
     </div>
   </form>
 
@@ -247,6 +248,8 @@ footer img{height:11px;width:auto;opacity:.9}
   var sel={}, who={nombre:'',correo:''};
   function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
   function key(){ return 'plaza_sel_'+who.correo.toLowerCase(); }
+  function saveWho(){ try{ localStorage.setItem('plaza_who',JSON.stringify(who)); }catch(e){} }
+  function loadWho(){ try{ var w=JSON.parse(localStorage.getItem('plaza_who')||'null'); return (w&&w.correo)?w:null; }catch(e){ return null; } }
   function save(){ try{ localStorage.setItem(key(),JSON.stringify(Object.keys(sel))); }catch(e){} }
   function load(){ try{ (JSON.parse(localStorage.getItem(key())||'[]')).forEach(function(i){ sel[i]=1; }); }catch(e){} }
   function render(){
@@ -306,10 +309,19 @@ footer img{height:11px;width:auto;opacity:.9}
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(c)){ say('Revisa tu correo electrónico.'); return; }
     say(''); document.getElementById('formBody').style.display='none';
     var ok=document.getElementById('ok'); document.getElementById('okName').textContent=''; ok.querySelector('h2').textContent='Programa'; ok.querySelector('p').innerHTML='Elige las sesiones a las que quieres asistir.';
-    ok.style.display='block'; abrir('',c);
+    ok.style.display='block'; abrir('',c); saveWho();
   };
+  document.getElementById('otra').onclick=function(e){ e.preventDefault(); try{ localStorage.removeItem('plaza_who'); }catch(x){} location.reload(); };
+  (function restaurar(){
+    var w=loadWho(); if(!w) return;
+    document.getElementById('formBody').style.display='none';
+    var ok=document.getElementById('ok');
+    if(w.nombre){ document.getElementById('okName').textContent=w.nombre.split(/\s+/)[0]; }
+    else { document.getElementById('okName').textContent=''; ok.querySelector('h2').textContent='Programa'; ok.querySelector('p').innerHTML='Elige las sesiones a las que quieres asistir.'; }
+    ok.style.display='block'; abrir(w.nombre,w.correo,true);
+  })();
   function done(n){
-    who.nombre=n; who.correo=(document.getElementById('correo').value||'').trim(); abrir(n,who.correo,true);
+    who.nombre=n; who.correo=(document.getElementById('correo').value||'').trim(); saveWho(); abrir(n,who.correo,true);
     document.getElementById('okName').textContent=n.split(/\s+/)[0];
     document.getElementById('formBody').style.display='none';
     document.getElementById('ok').style.display='block';
