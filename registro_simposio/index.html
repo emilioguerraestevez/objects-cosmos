@@ -31,7 +31,7 @@ body{background:var(--ink);color:var(--paper);font-family:Barlow,system-ui,sans-
   padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);position:relative;overflow-x:hidden}
 body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.10;mix-blend-mode:screen;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
-.diag{position:fixed;top:-5vh;bottom:-5vh;right:12vw;width:2px;background:var(--neon);transform:rotate(11deg);transform-origin:top;opacity:.85;pointer-events:none}
+.diag{position:fixed;top:-5vh;bottom:-5vh;right:12vw;width:2px;background:var(--neon);transform:rotate(11deg);transform-origin:top;opacity:.12;pointer-events:none}
 .wrap{position:relative;max-width:520px;margin:0 auto;padding:0 20px 36px}
 .brand{padding:26px 0 0;display:flex;align-items:flex-start;gap:18px}
 .brand .alc{height:132px;width:auto}
@@ -70,6 +70,64 @@ button:disabled{opacity:.55;cursor:default}
 footer{margin-top:34px;text-align:center;border-top:1px solid var(--line);padding-top:22px}
 footer p{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:10px}
 footer img{height:34px;width:auto;opacity:.95}
+
+/* ---- programa e inscripción a charlas ---- */
+#programa{display:none;margin-top:26px}
+.banner{border:1px solid var(--neon);border-radius:14px;padding:16px 16px 14px;background:rgba(57,255,43,.07);margin-bottom:18px}
+.banner b{font-family:"Barlow Condensed",sans-serif;font-size:26px;text-transform:uppercase;letter-spacing:.03em;line-height:1;display:block}
+.banner p{color:var(--mute);font-size:15px;line-height:1.45;margin-top:6px}
+.banner p strong{color:var(--paper);font-weight:600}
+.tools{display:flex;gap:10px;align-items:center;margin:0 0 6px}
+.tools .lnk{margin:0;width:auto;background:none;border:0;border-bottom:1px solid var(--mute);border-radius:0;padding:2px 0;font:500 14px Barlow,sans-serif;text-transform:none;letter-spacing:0;color:var(--paper);cursor:pointer}
+.blk{margin-top:22px}
+.blk h3{font-family:"Barlow Condensed",sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:.05em;display:flex;align-items:baseline;gap:10px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.blk h3 em{font-style:normal;color:var(--neon)}
+.ch{display:grid;grid-template-columns:76px 1fr;gap:6px 14px;padding:16px 0;border-bottom:1px solid var(--line)}
+.ch img{width:76px;height:76px;object-fit:cover;border-radius:8px;filter:grayscale(1) contrast(1.05);grid-row:1/3}
+.ch .hr{font-family:"Barlow Condensed",sans-serif;font-size:17px;font-weight:600;color:var(--neon);letter-spacing:.06em}
+.ch h4{font-family:"Barlow Condensed",sans-serif;font-size:23px;line-height:1;text-transform:uppercase;letter-spacing:.015em;font-weight:700;margin:2px 0 3px}
+.ch .de{font-size:13px;color:var(--mute);letter-spacing:.08em;text-transform:uppercase}
+.ch details{grid-column:1/3;margin-top:4px}
+.ch summary{font-size:14px;color:var(--mute);cursor:pointer;list-style:none;padding:4px 0}
+.ch summary::-webkit-details-marker{display:none}
+.ch summary::after{content:" +"}
+.ch details[open] summary::after{content:" –"}
+.ch details p{font-size:15px;line-height:1.5;color:#d6d8d3;padding:4px 0 6px}
+.ins{grid-column:1/3;margin:6px 0 0;width:100%;font-size:19px;padding:11px;background:transparent;color:var(--paper);border:1px solid var(--line);letter-spacing:.07em}
+.ins[aria-pressed=true]{background:var(--neon);color:#0a0a0a;border-color:var(--neon)}
+.bar{position:sticky;bottom:0;margin:22px -20px 0;padding:12px 20px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(to top,var(--ink) 70%,transparent);z-index:5}
+.bar .n{font-size:14px;color:var(--mute);margin-bottom:2px;text-align:center}
+.bar button{margin-top:6px}
+.bar .done{color:var(--neon);text-align:center;font-size:15px;margin-top:8px;min-height:0}
+.again{margin-top:14px;text-align:center;font-size:14px}
+.again a{color:var(--paper);border-bottom:1px solid var(--mute);text-decoration:none}
+#againBox{display:none;margin-top:10px}
+#againBox button{margin-top:10px;font-size:20px;padding:12px}
+
+#final{display:none;margin-top:6px;text-align:center}
+#final .tick{width:64px;height:64px;border-radius:50%;background:var(--neon);color:#0a0a0a;font-size:38px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:26px auto 16px}
+#final h2{font-family:"Barlow Condensed",sans-serif;font-size:36px;line-height:1;text-transform:uppercase;letter-spacing:.02em}
+#final .sub{color:var(--mute);margin-top:10px;font-size:16px;line-height:1.45}
+#final .sub b{color:var(--paper)}
+.tkt{margin-top:22px;text-align:left;background:rgba(14,15,14,.72);border:1px solid var(--line);border-radius:14px;padding:6px 18px 8px}
+.tkt .ev{padding:14px 0;border-bottom:1px solid var(--line);font-family:"Barlow Condensed",sans-serif;text-transform:uppercase}
+.tkt .ev b{display:block;font-size:24px;letter-spacing:.02em}
+.tkt .ev span{display:block;font-size:16px;color:var(--mute);letter-spacing:.05em;margin-top:2px}
+.tkt .it{display:flex;gap:14px;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--line)}
+.tkt .it:last-child{border-bottom:0}
+.tkt .it em{font-style:normal;font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:20px;color:var(--neon);flex:0 0 58px}
+.tkt .it div{font-size:17px;line-height:1.25}
+.tkt .it small{display:block;color:var(--mute);font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin-top:2px}
+.tkt .none{padding:16px 0;color:var(--mute)}
+#final .alt{margin-top:14px;background:transparent;color:var(--paper);border:1px solid var(--line);font-size:20px;padding:12px}
+#final .cap{color:var(--mute);font-size:13px;margin-top:14px;line-height:1.45}
+
+.ses{padding:6px 0 4px}
+.pn{display:flex;gap:14px;align-items:baseline;padding:9px 0}
+.pn em{font-style:normal;font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:19px;color:var(--neon);flex:0 0 54px}
+.pn div{font-size:17px;line-height:1.25}
+.pn small{display:block;color:var(--mute);font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin-top:2px}
+.blk .ins{margin-top:8px}
 </style>
 </head>
 <body>
@@ -112,13 +170,36 @@ footer img{height:34px;width:auto;opacity:.95}
       <button id="go" type="submit">Confirmar registro</button>
       <div class="msg" id="msg" role="alert"></div>
       <p class="note">Tus datos se usan únicamente para confirmar tu asistencia y enviarte información del simposio.</p>
+      <p class="again"><a href="#" id="again">Ya me registré · ver programa y elegir sesiones</a></p>
+      <div id="againBox">
+        <label for="correo2">Tu correo de registro</label>
+        <input id="correo2" type="email" autocomplete="email" inputmode="email" maxlength="120">
+        <button type="button" id="againGo">Ver programa</button>
+      </div>
     </div>
     <div class="ok" id="ok" role="status">
       <div class="tick">✓</div>
       <h2>Registro confirmado</h2>
-      <p>Gracias, <b id="okName"></b>.<br>Te esperamos el <b>12 de noviembre</b>.</p>
+      <p>Gracias, <b id="okName"></b>.<br>Te esperamos el <b>12 de noviembre</b>.<br>Abajo está el programa: elige los horarios a los que quieres asistir.</p>
     </div>
   </form>
+
+  <section id="programa" aria-label="Programa del simposio">
+    <div class="banner"><b>Elige tus sesiones</b>
+      <p>Jueves <strong>12 de noviembre</strong> · Torre Reforma. Marca los horarios a los que quieres asistir y confirma. Puedes volver y cambiarlas cuando quieras.</p></div>
+    <div class="tools"><button type="button" class="lnk" id="selAll">Seleccionar todas</button><button type="button" class="lnk" id="selNone">Quitar todas</button></div>
+    <div id="lista"></div>
+    <div class="bar"><div class="n" id="cnt"></div><button type="button" id="conf">Confirmar mis sesiones</button><div class="done" id="done" role="status"></div></div>
+  </section>
+
+  <section id="final" aria-live="polite">
+    <div class="tick">✓</div>
+    <h2 id="fTitulo">Inscripción confirmada</h2>
+    <p class="sub" id="fSub"></p>
+    <div class="tkt"><div class="ev"><b>Simposio · 12 de noviembre</b><span>Torre Reforma · Av. Paseo de la Reforma 483</span></div><div id="fLista"></div></div>
+    <button type="button" class="alt" id="fCambiar">Cambiar mis sesiones</button>
+    <p class="cap">Guarda una captura de esta pantalla como comprobante.</p>
+  </section>
 
   <footer>
     <p>technology partner: cosmos.ai</p>
@@ -151,7 +232,81 @@ footer img{height:34px;width:auto;opacity:.95}
       .then(function(){ done(nombre); })
       .catch(function(){ go.disabled=false; go.textContent='Confirmar registro'; say('No pudimos enviar tu registro. Revisa tu conexión e inténtalo de nuevo.'); });
   });
+
+  // ---- programa 12 nov (fuente: Foro Programa INTERIOR) ----
+  var BLOQUES=[
+   {id:'inicio',t:'Inicio',h:'9h20',s:[['9h20','Alessandra Rojo de la Vega','CDMX'],['9h20','Enrique Norten','CDMX'],['9h20','Célida Gómez Gámez','CDMX']]},
+   {id:'bloque-01',t:'Bloque 01',h:'9h50',s:[['9h50','Ricky Burdett','Londres'],['10h25','Jean-Louis Missika','París'],['11h00','Carina Arvizu','México']]},
+   {id:'bloque-02',t:'Bloque 02',h:'11h45',s:[['11h45','Miquel Adrià','CDMX + Iberoamérica'],['12h20','Mariana Rodríguez Mier y Terán','Alcaldía Cuauhtémoc'],['12h55','María Mercedes Jaramillo','Bogotá']]},
+   {id:'bloque-03',t:'Bloque 03',h:'15h00',s:[['15h00','Pilar Echezarreta y Francisco Quiñones','CDMX'],['15h20','Yap Lay Bee','Singapur'],['15h55','Janette Sadik-Khan','Nueva York']]}
+  ];
+  var TODAS=BLOQUES;
+  var sel={}, who={nombre:'',correo:''};
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function key(){ return 'plaza_sel_'+who.correo.toLowerCase(); }
+  function save(){ try{ localStorage.setItem(key(),JSON.stringify(Object.keys(sel))); }catch(e){} }
+  function load(){ try{ (JSON.parse(localStorage.getItem(key())||'[]')).forEach(function(i){ sel[i]=1; }); }catch(e){} }
+  function render(){
+    var h='';
+    BLOQUES.forEach(function(b){
+      h+='<div class="blk"><h3><em>'+esc(b.h)+'</em>'+esc(b.t)+'</h3><div class="ses">';
+      b.s.forEach(function(s){ h+='<div class="pn"><em>'+esc(s[0])+'</em><div>'+esc(s[1])+'<small>'+esc(s[2])+'</small></div></div>'; });
+      h+='</div><button type="button" class="ins" data-id="'+b.id+'" aria-pressed="'+(sel[b.id]?'true':'false')+'">'+(sel[b.id]?'Inscrito ✓':'Inscribirme')+'</button></div>';
+    });
+    document.getElementById('lista').innerHTML=h; count();
+  }
+  function count(){
+    var n=Object.keys(sel).length;
+    document.getElementById('cnt').textContent=n?(n+(n===1?' sesión seleccionada':' sesiones seleccionadas')+' de '+TODAS.length):'Aún no has elegido sesiones';
+  }
+  document.getElementById('lista').addEventListener('click',function(e){
+    var b=e.target.closest('.ins'); if(!b) return; var id=b.getAttribute('data-id');
+    if(sel[id]){ delete sel[id]; } else { sel[id]=1; }
+    b.setAttribute('aria-pressed',sel[id]?'true':'false'); b.textContent=sel[id]?'Inscrito ✓':'Inscribirme';
+    document.getElementById('done').textContent=''; save(); count();
+  });
+  document.getElementById('selAll').onclick=function(){ TODAS.forEach(function(s){ sel[s.id]=1; }); save(); render(); };
+  document.getElementById('selNone').onclick=function(){ sel={}; save(); render(); };
+  document.getElementById('conf').onclick=function(){
+    var ids=Object.keys(sel), c=document.getElementById('conf'), dn=document.getElementById('done');
+    if(!APPS_SCRIPT_URL){ dn.textContent='La inscripción aún no está disponible.'; return; }
+    c.disabled=true; c.textContent='Enviando…';
+    var txt=TODAS.filter(function(s){return sel[s.id];}).map(function(s){return s.h+' '+s.t;}).join(' | ');
+    var body=new URLSearchParams({accion:'charlas',nombre:who.nombre,correo:who.correo,charlas:ids.join(','),detalle:txt,total:String(ids.length),origen:'registro_simposio'});
+    fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',body:body}).then(function(){
+      c.disabled=false; c.textContent='Confirmar mis sesiones'; final(ids);
+    }).catch(function(){ c.disabled=false; c.textContent='Confirmar mis sesiones'; dn.textContent='No pudimos enviar tu selección. Revisa tu conexión e inténtalo de nuevo.'; });
+  };
+  function final(ids){
+    var ch=TODAS.filter(function(s){return sel[s.id];}), n=ch.length, nom=(who.nombre||'').split(/\s+/)[0];
+    document.getElementById('fTitulo').textContent=n?'Inscripción confirmada':'Registro guardado';
+    document.getElementById('fSub').innerHTML=(nom?('Gracias, <b>'+esc(nom)+'</b>.<br>'):'')+(n?('Quedaste inscrito en <b>'+n+(n===1?' sesión':' sesiones')+'</b>.'):'Aún no elegiste sesiones.');
+    document.getElementById('fLista').innerHTML=n?ch.map(function(b){return '<div class="it"><em>'+esc(b.h)+'</em><div>'+esc(b.t)+'<small>'+b.s.map(function(s){return esc(s[1]);}).join(' · ')+'</small></div></div>';}).join(''):'<div class="none">Puedes elegirlas cuando quieras.</div>';
+    document.getElementById('fCambiar').textContent=n?'Cambiar mis sesiones':'Elegir sesiones';
+    ['programa','ok','formBody'].forEach(function(i){ document.getElementById(i).style.display='none'; });
+    document.getElementById('f').style.display='none';
+    document.getElementById('final').style.display='block';
+    window.scrollTo({top:document.querySelector('.when').offsetTop-10,behavior:'smooth'});
+  }
+  document.getElementById('fCambiar').onclick=function(){
+    document.getElementById('final').style.display='none'; document.getElementById('programa').style.display='block';
+    document.getElementById('done').textContent=''; document.getElementById('programa').scrollIntoView({behavior:'smooth',block:'start'});
+  };
+  function abrir(nombre,correo,quieto){
+    who={nombre:nombre,correo:correo}; sel={}; load(); render();
+    document.getElementById('programa').style.display='block';
+    if(!quieto) document.getElementById('programa').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  document.getElementById('again').onclick=function(e){ e.preventDefault(); document.getElementById('againBox').style.display='block'; document.getElementById('correo2').focus(); };
+  document.getElementById('againGo').onclick=function(){
+    var c=document.getElementById('correo2').value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(c)){ say('Revisa tu correo electrónico.'); return; }
+    say(''); document.getElementById('formBody').style.display='none';
+    var ok=document.getElementById('ok'); document.getElementById('okName').textContent=''; ok.querySelector('h2').textContent='Programa'; ok.querySelector('p').innerHTML='Elige las sesiones a las que quieres asistir.';
+    ok.style.display='block'; abrir('',c);
+  };
   function done(n){
+    who.nombre=n; who.correo=(document.getElementById('correo').value||'').trim(); abrir(n,who.correo,true);
     document.getElementById('okName').textContent=n.split(/\s+/)[0];
     document.getElementById('formBody').style.display='none';
     document.getElementById('ok').style.display='block';
