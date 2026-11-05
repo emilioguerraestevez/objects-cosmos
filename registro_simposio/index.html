@@ -126,8 +126,11 @@ footer img{height:34px;width:auto;opacity:.95}
 .pn{display:flex;gap:14px;align-items:baseline;padding:9px 0}
 .pn em{font-style:normal;font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:19px;color:var(--neon);flex:0 0 54px}
 .pn div{font-size:17px;line-height:1.25}
+.pn a{color:var(--paper);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.35)}
 .pn small{display:block;color:var(--mute);font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin-top:2px}
 .blk .ins{margin-top:8px}
+.bn{font-family:"Barlow Condensed",sans-serif;font-size:25px;line-height:1.05;text-transform:uppercase;letter-spacing:.015em;font-weight:700;margin-top:10px}
+.bd{font-size:15px;line-height:1.5;color:#d6d8d3;margin-top:6px}
 </style>
 </head>
 <body>
@@ -186,7 +189,7 @@ footer img{height:34px;width:auto;opacity:.95}
 
   <section id="programa" aria-label="Programa del simposio">
     <div class="banner"><b>Elige tus sesiones</b>
-      <p>Jueves <strong>12 de noviembre</strong> · Torre Reforma. Marca los horarios a los que quieres asistir y confirma. Puedes volver y cambiarlas cuando quieras.</p></div>
+      <p>Jueves <strong>12 de noviembre</strong> · Torre Reforma. Marca los horarios a los que quieres asistir y confirma. Puedes volver y cambiarlas cuando quieras.</p><p style="margin-top:8px"><a href="perfiles.html" style="color:var(--neon);border-bottom:1px solid var(--neon);text-decoration:none;font-weight:600">Conocer a los participantes →</a></p></div>
     <div class="tools"><button type="button" class="lnk" id="selAll">Seleccionar todas</button><button type="button" class="lnk" id="selNone">Quitar todas</button></div>
     <div id="lista"></div>
     <div class="bar"><div class="n" id="cnt"></div><button type="button" id="conf">Confirmar mis sesiones</button><div class="done" id="done" role="status"></div></div>
@@ -235,10 +238,10 @@ footer img{height:34px;width:auto;opacity:.95}
 
   // ---- programa 12 nov (fuente: Foro Programa INTERIOR) ----
   var BLOQUES=[
-   {id:'inicio',t:'Inicio',h:'9h20',s:[['9h20','Alessandra Rojo de la Vega','CDMX'],['9h20','Enrique Norten','CDMX'],['9h20','Célida Gómez Gámez','CDMX']]},
-   {id:'bloque-01',t:'Bloque 01',h:'9h50',s:[['9h50','Ricky Burdett','Londres'],['10h25','Jean-Louis Missika','París'],['11h00','Carina Arvizu','México']]},
-   {id:'bloque-02',t:'Bloque 02',h:'11h45',s:[['11h45','Miquel Adrià','CDMX + Iberoamérica'],['12h20','Mariana Rodríguez Mier y Terán','Alcaldía Cuauhtémoc'],['12h55','María Mercedes Jaramillo','Bogotá']]},
-   {id:'bloque-03',t:'Bloque 03',h:'15h00',s:[['15h00','Pilar Echezarreta y Francisco Quiñones','CDMX'],['15h20','Yap Lay Bee','Singapur'],['15h55','Janette Sadik-Khan','Nueva York']]}
+   {id:'inicio',t:'Inicio',h:'9h20',s:[['9h20','Alessandra Rojo de la Vega','CDMX','rojo-de-la-vega'],['9h20','Enrique Norten','CDMX','norten'],['9h20','Célida Gómez Gámez','CDMX','gomez-gamez']]},
+   {id:'bloque-01',t:'Bloque 1',n:'Ciudades que se gobiernan con datos',d:'Cómo se comparan, se miden y se transforman las grandes ciudades: densidad, movilidad y desigualdad, la innovación pública en París y el desarrollo urbano en México.',h:'9h50',s:[['9h50','Ricky Burdett','Londres','burdett'],['10h25','Jean-Louis Missika','París','missika'],['11h00','Carina Arvizu','México','arvizu']]},
+   {id:'bloque-02',t:'Bloque 2',n:'Arquitectura, ciudad y gobierno',d:'Desde la arquitectura y la crítica, la obra pública y la planeación del suelo: cómo se construye y se gobierna la ciudad en México y en Bogotá.',h:'11h45',s:[['11h45','Miquel Adrià','CDMX + Iberoamérica','adria'],['12h20','Mariana Rodríguez Mier y Terán','Alcaldía Cuauhtémoc','mier-y-teran'],['12h55','María Mercedes Jaramillo','Bogotá','jaramillo']]},
+   {id:'bloque-03',t:'Bloque 3',n:'Calles, movilidad y planeación',d:'Del aula a la calle: la experiencia urbana en la formación de arquitectos, la planeación de Singapur y la transformación de las calles de Nueva York en espacio público.',h:'15h00',s:[['15h00','Pilar Echezarreta y Francisco Quiñones','CDMX','echezarreta-quinones'],['15h20','Yap Lay Bee','Singapur','yap'],['15h55','Janette Sadik-Khan','Nueva York','sadik-khan']]}
   ];
   var TODAS=BLOQUES;
   var sel={}, who={nombre:'',correo:''};
@@ -249,8 +252,8 @@ footer img{height:34px;width:auto;opacity:.95}
   function render(){
     var h='';
     BLOQUES.forEach(function(b){
-      h+='<div class="blk"><h3><em>'+esc(b.h)+'</em>'+esc(b.t)+'</h3><div class="ses">';
-      b.s.forEach(function(s){ h+='<div class="pn"><em>'+esc(s[0])+'</em><div>'+esc(s[1])+'<small>'+esc(s[2])+'</small></div></div>'; });
+      h+='<div class="blk"><h3><em>'+esc(b.h)+'</em>'+esc(b.t)+'</h3>'+(b.n?'<div class="bn">'+esc(b.n)+'</div><p class="bd">'+esc(b.d)+'</p>':'')+'<div class="ses">';
+      b.s.forEach(function(s){ h+='<div class="pn"><em>'+esc(s[0])+'</em><div><a href="perfiles.html#'+s[3]+'">'+esc(s[1])+'</a><small>'+esc(s[2])+'</small></div></div>'; });
       h+='</div><button type="button" class="ins" data-id="'+b.id+'" aria-pressed="'+(sel[b.id]?'true':'false')+'">'+(sel[b.id]?'Inscrito ✓':'Inscribirme')+'</button></div>';
     });
     document.getElementById('lista').innerHTML=h; count();
@@ -271,7 +274,7 @@ footer img{height:34px;width:auto;opacity:.95}
     var ids=Object.keys(sel), c=document.getElementById('conf'), dn=document.getElementById('done');
     if(!APPS_SCRIPT_URL){ dn.textContent='La inscripción aún no está disponible.'; return; }
     c.disabled=true; c.textContent='Enviando…';
-    var txt=TODAS.filter(function(s){return sel[s.id];}).map(function(s){return s.h+' '+s.t;}).join(' | ');
+    var txt=TODAS.filter(function(s){return sel[s.id];}).map(function(s){return s.h+' '+s.t+(s.n?' · '+s.n:'');}).join(' | ');
     var body=new URLSearchParams({accion:'charlas',nombre:who.nombre,correo:who.correo,charlas:ids.join(','),detalle:txt,total:String(ids.length),origen:'registro_simposio'});
     fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',body:body}).then(function(){
       c.disabled=false; c.textContent='Confirmar mis sesiones'; final(ids);
@@ -281,7 +284,7 @@ footer img{height:34px;width:auto;opacity:.95}
     var ch=TODAS.filter(function(s){return sel[s.id];}), n=ch.length, nom=(who.nombre||'').split(/\s+/)[0];
     document.getElementById('fTitulo').textContent=n?'Inscripción confirmada':'Registro guardado';
     document.getElementById('fSub').innerHTML=(nom?('Gracias, <b>'+esc(nom)+'</b>.<br>'):'')+(n?('Quedaste inscrito en <b>'+n+(n===1?' sesión':' sesiones')+'</b>.'):'Aún no elegiste sesiones.');
-    document.getElementById('fLista').innerHTML=n?ch.map(function(b){return '<div class="it"><em>'+esc(b.h)+'</em><div>'+esc(b.t)+'<small>'+b.s.map(function(s){return esc(s[1]);}).join(' · ')+'</small></div></div>';}).join(''):'<div class="none">Puedes elegirlas cuando quieras.</div>';
+    document.getElementById('fLista').innerHTML=n?ch.map(function(b){return '<div class="it"><em>'+esc(b.h)+'</em><div>'+esc(b.t)+(b.n?' · '+esc(b.n):'')+'<small>'+b.s.map(function(s){return esc(s[1]);}).join(' · ')+'</small></div></div>';}).join(''):'<div class="none">Puedes elegirlas cuando quieras.</div>';
     document.getElementById('fCambiar').textContent=n?'Cambiar mis sesiones':'Elegir sesiones';
     ['programa','ok','formBody'].forEach(function(i){ document.getElementById(i).style.display='none'; });
     document.getElementById('f').style.display='none';
