@@ -193,7 +193,7 @@ footer img{height:11px;width:auto;opacity:.9}
       <p>Jueves <strong>12 de noviembre</strong> · Torre Reforma. Marca los horarios a los que quieres asistir y confirma. Puedes volver y cambiarlas cuando quieras.</p><p style="margin-top:8px"><a href="perfiles.html" style="color:var(--neon);border-bottom:1px solid var(--neon);text-decoration:none;font-weight:600">Conocer a los participantes →</a></p></div>
     <div class="tools"><button type="button" class="lnk" id="selAll">Seleccionar todas</button><button type="button" class="lnk" id="selNone">Quitar todas</button></div>
     <div id="lista"></div>
-    <div class="bar"><div class="n" id="cnt"></div><button type="button" id="conf">Confirmar mis sesiones</button><div class="done" id="done" role="status"></div></div>
+    <div class="bar"><div class="n" id="cnt"></div><div id="pedir" style="display:none;margin:6px 0 4px"><label for="correo3" style="margin:0 0 6px">Tu correo de registro</label><input id="correo3" type="email" autocomplete="email" inputmode="email" maxlength="120"></div><button type="button" id="conf">Confirmar mis sesiones</button><div class="done" id="done" role="status"></div></div>
   </section>
 
   <section id="final" aria-live="polite">
@@ -250,7 +250,7 @@ footer img{height:11px;width:auto;opacity:.9}
   function key(){ return 'plaza_sel_'+who.correo.toLowerCase(); }
   function saveWho(){ var j=JSON.stringify(who); try{ localStorage.setItem('plaza_who',j); }catch(e){} try{ sessionStorage.setItem('plaza_who',j); }catch(e){} }
   function loadWho(){ var k=['localStorage','sessionStorage']; for(var i=0;i<k.length;i++){ try{ var w=JSON.parse(window[k[i]].getItem('plaza_who')||'null'); if(w&&w.correo) return w; }catch(e){} } return null; }
-  function save(){ try{ localStorage.setItem(key(),JSON.stringify(Object.keys(sel))); }catch(e){} }
+  function save(){ if(!who.correo) return; try{ localStorage.setItem(key(),JSON.stringify(Object.keys(sel))); }catch(e){} }
   function load(){ try{ (JSON.parse(localStorage.getItem(key())||'[]')).forEach(function(i){ sel[i]=1; }); }catch(e){} }
   function render(){
     var h='';
@@ -275,6 +275,13 @@ footer img{height:11px;width:auto;opacity:.9}
   document.getElementById('selNone').onclick=function(){ sel={}; save(); render(); };
   document.getElementById('conf').onclick=function(){
     var ids=Object.keys(sel), c=document.getElementById('conf'), dn=document.getElementById('done');
+    if(!who.correo){
+      var pe=document.getElementById('pedir'), c3=document.getElementById('correo3');
+      if(pe.style.display!=='block'){ pe.style.display='block'; c3.focus(); dn.textContent='Escribe el correo con el que te registraste para guardar tus sesiones.'; return; }
+      var cv=c3.value.trim();
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(cv)){ dn.textContent='Revisa tu correo electrónico.'; return; }
+      who.correo=cv; saveWho(); save(); pe.style.display='none';
+    }
     if(!APPS_SCRIPT_URL){ dn.textContent='La inscripción aún no está disponible.'; return; }
     c.disabled=true; c.textContent='Enviando…';
     var txt=TODAS.filter(function(s){return sel[s.id];}).map(function(s){return s.h+' '+s.t+(s.n?' · '+s.n:'');}).join(' | ');
@@ -313,7 +320,18 @@ footer img{height:11px;width:auto;opacity:.9}
   };
   document.getElementById('otra').onclick=function(e){ e.preventDefault(); try{ localStorage.removeItem('plaza_who'); }catch(x){} try{ sessionStorage.removeItem('plaza_who'); }catch(x){} location.reload(); };
   (function restaurar(){
-    var w=loadWho(); if(!w) return;
+    var w=loadWho();
+    if(!w){
+      // llegan desde el correo ("Elegir mis sesiones"): ya se registraron; directo al horario
+      if(location.hash==='#sesiones'){
+        document.getElementById('formBody').style.display='none';
+        var ok0=document.getElementById('ok'); document.getElementById('okName').textContent='';
+        ok0.querySelector('h2').textContent='Programa'; ok0.querySelector('p').innerHTML='Elige las sesiones a las que quieres asistir.';
+        ok0.style.display='block'; abrir('','',true);
+        var pg0=document.getElementById('programa'); window.scrollTo(0,pg0.getBoundingClientRect().top+window.pageYOffset-8);
+      }
+      return;
+    }
     document.getElementById('formBody').style.display='none';
     var ok=document.getElementById('ok');
     if(w.nombre){ document.getElementById('okName').textContent=w.nombre.split(/\s+/)[0]; }
