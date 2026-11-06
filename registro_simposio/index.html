@@ -248,8 +248,8 @@ footer img{height:11px;width:auto;opacity:.9}
   var sel={}, who={nombre:'',correo:''};
   function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
   function key(){ return 'plaza_sel_'+who.correo.toLowerCase(); }
-  function saveWho(){ try{ localStorage.setItem('plaza_who',JSON.stringify(who)); }catch(e){} }
-  function loadWho(){ try{ var w=JSON.parse(localStorage.getItem('plaza_who')||'null'); return (w&&w.correo)?w:null; }catch(e){ return null; } }
+  function saveWho(){ var j=JSON.stringify(who); try{ localStorage.setItem('plaza_who',j); }catch(e){} try{ sessionStorage.setItem('plaza_who',j); }catch(e){} }
+  function loadWho(){ var k=['localStorage','sessionStorage']; for(var i=0;i<k.length;i++){ try{ var w=JSON.parse(window[k[i]].getItem('plaza_who')||'null'); if(w&&w.correo) return w; }catch(e){} } return null; }
   function save(){ try{ localStorage.setItem(key(),JSON.stringify(Object.keys(sel))); }catch(e){} }
   function load(){ try{ (JSON.parse(localStorage.getItem(key())||'[]')).forEach(function(i){ sel[i]=1; }); }catch(e){} }
   function render(){
@@ -311,7 +311,7 @@ footer img{height:11px;width:auto;opacity:.9}
     var ok=document.getElementById('ok'); document.getElementById('okName').textContent=''; ok.querySelector('h2').textContent='Programa'; ok.querySelector('p').innerHTML='Elige las sesiones a las que quieres asistir.';
     ok.style.display='block'; abrir('',c); saveWho();
   };
-  document.getElementById('otra').onclick=function(e){ e.preventDefault(); try{ localStorage.removeItem('plaza_who'); }catch(x){} location.reload(); };
+  document.getElementById('otra').onclick=function(e){ e.preventDefault(); try{ localStorage.removeItem('plaza_who'); }catch(x){} try{ sessionStorage.removeItem('plaza_who'); }catch(x){} location.reload(); };
   (function restaurar(){
     var w=loadWho(); if(!w) return;
     document.getElementById('formBody').style.display='none';
@@ -319,6 +319,7 @@ footer img{height:11px;width:auto;opacity:.9}
     if(w.nombre){ document.getElementById('okName').textContent=w.nombre.split(/\s+/)[0]; }
     else { document.getElementById('okName').textContent=''; ok.querySelector('h2').textContent='Programa'; ok.querySelector('p').innerHTML='Elige las sesiones a las que quieres asistir.'; }
     ok.style.display='block'; abrir(w.nombre,w.correo,true);
+    var pg=document.getElementById('programa'); if(pg) window.scrollTo(0,pg.getBoundingClientRect().top+window.pageYOffset-8);
   })();
   function done(n){
     who.nombre=n; who.correo=(document.getElementById('correo').value||'').trim(); saveWho(); abrir(n,who.correo,true);
