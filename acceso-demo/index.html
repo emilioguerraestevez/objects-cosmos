@@ -1,0 +1,110 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Entrega de acceso · cosmos.ai</title>
+<meta property="og:title" content="Tu usuario de cosmos ya está listo">
+<meta property="og:description" content="Ábrelo con este enlace. Es solo tuyo.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="cosmos.ai">
+<meta property="og:url" content="https://objects-cosmos.ai/acceso-demo/">
+<meta property="og:image" content="https://objects-cosmos.ai/acceso-demo/thumb-20261123.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://objects-cosmos.ai/acceso-demo/thumb-20261123.png">
+<link rel="icon" type="image/png" href="cosmos_ink.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,800&display=swap">
+<style>
+/* Layout: texto a la izquierda, teléfono o correo a la derecha; una sola pieza, dos canales */
+:root{--bg:#f7f6f2;--fg:#1c1b19;--mut:#6b6b70;--navy:#0e1c30;--red:#e63423;--card:#ffffff;--line:rgba(28,27,25,.10);--bubble:#e9e7e0;--bubble-me:#0e1c30;--bubble-me-fg:#fff;--chrome:#ffffff;
+--sans:'Montserrat',system-ui,-apple-system,'Segoe UI',sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1626;--fg:#f4f2ec;--mut:#92a0b8;--card:#12233b;--line:rgba(255,255,255,.12);--bubble:#1b3354;--bubble-me:#f4f2ec;--bubble-me-fg:#0e1c30;--chrome:#12233b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0b1626;--fg:#f4f2ec;--mut:#92a0b8;--card:#12233b;--line:rgba(255,255,255,.12);--bubble:#1b3354;--bubble-me:#f4f2ec;--bubble-me-fg:#0e1c30;--chrome:#12233b;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);margin:0;padding-block:48px 40px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1040px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,440px);gap:56px;align-items:center}
+.kick{font-size:12px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--mut)}
+h1{font-size:clamp(34px,5vw,52px);line-height:1.08;letter-spacing:-.03em;font-weight:800;margin:18px 0 18px;text-wrap:balance}
+h1 em{font-style:italic}
+.lead{font-size:18px;line-height:1.6;color:var(--mut);max-width:30em;margin:0 0 28px}
+.tabs{display:inline-flex;gap:4px;padding:4px;border-radius:999px;border:1px solid var(--line);background:var(--card)}
+.tabs button{font:600 14px var(--sans);border:0;background:transparent;color:var(--mut);padding:10px 20px;border-radius:999px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--fg);color:var(--bg)}
+.tabs button:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.note{margin-top:26px;font-size:13px;color:var(--mut);display:flex;align-items:center;gap:10px}
+.note i{width:8px;height:8px;border-radius:50%;background:var(--red);display:block;flex:0 0 8px}
+.stage{display:flex;justify-content:center}
+.phone{width:100%;max-width:380px;border:1px solid var(--line);border-radius:38px;background:var(--card);padding:14px 14px 22px}
+.bar{display:flex;align-items:center;gap:12px;padding:10px 8px 14px;border-bottom:1px solid var(--line)}
+.av{width:38px;height:38px;border-radius:50%;background:var(--navy);display:grid;place-items:center;flex:0 0 38px;overflow:hidden}
+.av img{width:24px;height:auto}
+.bar b{display:block;font-size:15px}.bar span{font-size:12px;color:var(--mut)}
+.chat{padding:18px 6px 4px;display:flex;flex-direction:column;gap:12px}
+.msg{max-width:92%;background:var(--bubble);border-radius:20px 20px 20px 6px;padding:12px 14px;font-size:14.5px;line-height:1.5}
+.msg.me{align-self:flex-end;background:var(--bubble-me);color:var(--bubble-me-fg);border-radius:20px 20px 6px 20px}
+.preview{color:var(--fg);border-radius:14px;overflow:hidden;background:var(--card);border:1px solid var(--line);margin:-2px -2px 10px}
+.preview img{display:block;width:100%;height:auto}
+.preview .t{padding:10px 12px 11px;font-size:12.5px;line-height:1.4}.preview .t b{display:block;font-size:13px}.preview .t span{color:var(--mut)}
+.time{font-size:11px;color:var(--mut);margin-top:6px;display:block}
+.mail{width:100%;max-width:440px;border:1px solid var(--line);border-radius:18px;background:var(--card);overflow:hidden}
+.mail .h{padding:18px 22px;border-bottom:1px solid var(--line);font-size:13px;color:var(--mut);line-height:1.7}
+.mail .h b{color:var(--fg);font-size:16px;display:block;margin-bottom:4px;font-weight:700}
+.mail .c{padding:22px}
+.mail .c p{font-size:14.5px;line-height:1.6;margin:0 0 16px}
+.mail .c img.th{display:block;width:100%;height:auto;border-radius:12px;margin:6px 0 18px}
+.btn{display:inline-block;background:var(--fg);color:var(--bg);font-weight:700;font-size:14px;padding:13px 22px;border-radius:999px;text-decoration:none}
+.sig{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.sig img{height:22px;width:auto}
+:root[data-theme="dark"] .sig img{background:#f7f6f2;padding:6px 10px;height:34px;border-radius:8px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .sig img{background:#f7f6f2;padding:6px 10px;height:34px;border-radius:8px}}
+@media (max-width:820px){.wrap{grid-template-columns:minmax(0,1fr);gap:36px}}
+@media (prefers-reduced-motion:no-preference){.stage>*{animation:in .5s ease both}@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}}
+</style>
+</head><body>
+<main class="wrap">
+ <section>
+  <div class="kick">Entrega de acceso</div>
+  <h1>Así recibe su usuario <em>cada persona.</em></h1>
+  <p class="lead">Cada persona lo recibe por WhatsApp o por correo. En los dos casos llega la misma imagen y un enlace personal que abre su usuario de cosmos.</p>
+  <div class="tabs" role="tablist" aria-label="Canal de entrega">
+   <button id="t-wa" role="tab" aria-selected="true" aria-controls="v-wa">WhatsApp</button>
+   <button id="t-mail" role="tab" aria-selected="false" aria-controls="v-mail">Correo</button>
+  </div>
+  <div class="note"><i></i><span>Demo ilustrativo. El enlace de ejemplo no abre ningún usuario.</span></div>
+ </section>
+ <section class="stage">
+  <div class="phone" id="v-wa" role="tabpanel" aria-labelledby="t-wa">
+   <div class="bar"><div class="av"><img alt="" src="cosmos_ink.png" style="filter:brightness(0) invert(1)"></div><div><b>cosmos.ai</b><span>en línea</span></div></div>
+   <div class="chat">
+    <div class="msg me">
+     <div class="preview"><img alt="Tu usuario de cosmos ya está listo" src="thumb-20261123.png"><div class="t"><b>Acceso — Cosmos AI</b><span>access.go-cosmos.ai</span></div></div>
+     Tu usuario de cosmos ya está listo. Ábrelo desde este enlace; es solo tuyo.
+     <span class="time">9:41</span>
+    </div>
+   </div>
+  </div>
+  <div class="mail" id="v-mail" role="tabpanel" aria-labelledby="t-mail" hidden>
+   <div class="h"><b>Tu usuario de cosmos ya está listo</b>De: cosmos.ai<br>Para: tú</div>
+   <div class="c">
+    <p>Hola,</p>
+    <p>Ya puedes entrar a cosmos. Este enlace es personal y solo abre tu usuario.</p>
+    <img class="th" alt="Tu usuario de cosmos ya está listo" src="thumb-20261123.png">
+    <a class="btn" href="#correo" onclick="return false">Abrir mi acceso</a>
+    <div class="sig"><span>go-cosmos.ai</span><img alt="cosmos.ai" src="cosmos_ink.png"></div>
+   </div>
+  </div>
+ </section>
+</main>
+<script>
+(function(){
+ var wa=document.getElementById('v-wa'),ma=document.getElementById('v-mail'),tw=document.getElementById('t-wa'),tm=document.getElementById('t-mail');
+ function show(w){var isW=w!=='correo';wa.hidden=!isW;ma.hidden=isW;tw.setAttribute('aria-selected',isW);tm.setAttribute('aria-selected',!isW);}
+ tw.onclick=function(){show('whatsapp');try{location.hash='whatsapp'}catch(e){}};
+ tm.onclick=function(){show('correo');try{location.hash='correo'}catch(e){}};
+ function route(){show(location.hash==='#correo'?'correo':'whatsapp')}
+ window.addEventListener('hashchange',route);route();
+})();
+</script>
+
+</body></html>
