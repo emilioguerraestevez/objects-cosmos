@@ -24,13 +24,16 @@ async function correr(d) {
   for (const [rol, f] of Object.entries(d.archivos)) {
     const p = '/work/in/' + rol; py.FS.writeFile(p, new Uint8Array(f)); rutas[rol] = p;
   }
+  const sl = [];
+  (d.sueltos || []).forEach((s, i) => { const ext = (s.nombre.match(/\.(xlsx|csv)$/i) || ['.xlsx'])[0]; const p = '/work/in/suelto_' + i + ext; py.FS.writeFile(p, new Uint8Array(s.buf)); sl.push([p, s.prefijo, s.nombre]); });
+  py.globals.set('sueltos_js', JSON.stringify(sl));
   py.globals.set('rutas_js', JSON.stringify(rutas));
   py.globals.set('corte_js', d.corte);
   const resultado = py.runPython(`
 import json, pipeline
 r = json.loads(rutas_js)
-res = pipeline.correr(r['concentrado'], r['suac'], r['amazonica'], r.get('padron_previo'), corte_js, '/work/out/NEBULA_' + corte_js,
-                      r.get('base_previa'), log=print)
+res = pipeline.correr(r.get('concentrado'), r.get('suac'), r.get('amazonica'), r.get('padron_previo'), corte_js, '/work/out/NEBULA_' + corte_js,
+                      r.get('base_previa'), log=print, sueltos=[tuple(x) for x in json.loads(sueltos_js)])
 json.dumps({'zip': res['zip'], 'csv_base': res['archivos']['csv_base'], 'csv_padron': res['archivos']['csv_padron'],
             'avisos': res['avisos'], 'filas': res['filas'], 'personas': res['personas'], 'altas': res['altas']})
 `);

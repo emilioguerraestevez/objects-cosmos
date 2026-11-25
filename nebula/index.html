@@ -44,6 +44,7 @@ button:disabled{opacity:.4;cursor:not-allowed}
 .kp div b{display:block;font-size:26px;letter-spacing:-.02em;line-height:1.1}.kp div span{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
 ul.av{margin:8px 0 0;padding-left:20px}ul.av li{margin:6px 0;font-size:14.5px}
 .paso{font-size:15px}
+.area{font:600 13px var(--sans);border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:10px;padding:7px 10px;max-width:220px}
 .pie{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
 .nota{margin-top:26px;color:var(--mut);font-size:12.5px}
 [hidden]{display:none!important}
@@ -53,7 +54,7 @@ ul.av{margin:8px 0 0;padding-left:20px}ul.av li{margin:6px 0;font-size:14.5px}
 <p class="sub">Sube las bases de la semana y recibe el paquete listo para IT.</p>
 
 <h2>1 · Sube las bases de la semana</h2>
-<div class="drop" id="drop"><b>Arrastra aquí todas las bases</b><span>o haz clic para elegirlas (puedes seleccionar varias a la vez)</span>
+<div class="drop" id="drop"><b>Arrastra aquí todas las bases que recibiste</b><span>las de cada área, el SUAC, Amazónica o un concentrado ya armado; todas a la vez</span>
 <input id="inp" type="file" multiple hidden></div>
 <div class="lista card" id="lista" style="margin-top:14px"></div>
 
@@ -68,7 +69,7 @@ ul.av{margin:8px 0 0;padding-left:20px}ul.av li{margin:6px 0;font-size:14.5px}
 
 <div class="nota" id="mem"></div>
 <div class="pie"><span>Nebula · uso interno</span><span>Hecho en México, por humanos, con ayuda de las máquinas.</span></div>
-<div class="nota"> Por ahora arma el paquete a partir del <b>concentrado ya integrado</b>, el SUAC y Amazónica. El armado del concentrado desde las bases sueltas de cada área viene en la siguiente versión.</div>
+<div class="nota"> Si algún archivo no se entiende, Nebula lo dice en los avisos. Mándale a Emilio el texto del recuadro gris.</div>
 </div>
 <script>
 const $=s=>document.querySelector(s);
@@ -95,30 +96,42 @@ async function cargaMemoria(){
 }
 
 // ── archivos
+const AREAS=[['DS','Desarrollo Social'],['EG','Género'],['GOB','Gobierno'],['JUR','Jurídico'],['OBRAS','Obras'],['PC1','Protección Civil (PC1)'],['PC2','Protección Civil (PC2)'],['SC','Seguridad'],['SU','Servicios Urbanos'],['CE','Cultura'],['PART','Participación Ciudadana']];
+let sueltos=[];
+function adivina(n){n=n.toLowerCase();
+ if(/cultura|educaci/.test(n))return'CE';if(/jur[ií]dic|legisla/.test(n))return'JUR';if(/obra|urbano/.test(n)&&!/servicios urbanos/.test(n))return'OBRAS';
+ if(/protec|civil/.test(n))return'PC1';if(/segur/.test(n))return'SC';if(/servicios urbanos|limpia|dgsu/.test(n))return'SU';
+ if(/desarrollo social|dgds|social/.test(n))return'DS';if(/g[eé]nero|mujer|equidad/.test(n))return'EG';if(/gobierno|dgg/.test(n))return'GOB';if(/participa|ciudadan/.test(n))return'PART';return''}
 function clasifica(f){for(const r of ROLES){if(r.re.test(f.name)&&r.ext.test(f.name))return r.k}return null}
-function agrega(lst){for(const f of lst){const k=clasifica(f);if(k)files[k]=f;else files['x:'+f.name]=f}pinta();detectaFecha()}
+function agrega(lst){for(const f of lst){const k=clasifica(f);if(k)files[k]=f;else if(/\.(xlsx|csv)$/i.test(f.name)&&!sueltos.find(s=>s.file.name===f.name&&s.file.size===f.size))sueltos.push({file:f,prefijo:adivina(f.name)})}pinta();detectaFecha()}
 function detectaFecha(){
   if($('#corte').dataset.manual)return;
-  const f=files.concentrado;if(!f)return;
+  const f=files.concentrado||files.suac||(sueltos[0]&&sueltos[0].file);if(!f)return;
   const m=f.name.toLowerCase().match(/(\d{1,2})\s*(ene|feb|mar|abr|may|jun|jul|ago|sep|oct|nov|dic)/);
   if(m){const mes=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'].indexOf(m[2])+1;
     const y=new Date().getFullYear();$('#corte').value=`${y}-${String(mes).padStart(2,'0')}-${String(m[1]).padStart(2,'0')}`}
+  else{const s=f.name.match(/\((\d{2})(\d{2})(\d{2})\)/);if(s)$('#corte').value=`20${s[1]}-${s[2]}-${s[3]}`}
 }
 function pinta(){
-  let h='';let falta=false;
-  for(const r of ROLES){
-    const f=files[r.k];const enMem=(r.k==='padron_previo'&&memoria.padron)||(r.k==='base_previa'&&memoria.base);
-    let est,cls;
-    if(f){est='Listo';cls='ok'}
-    else if(enMem){est='Recordado de la semana pasada';cls='ok'}
-    else if(r.oblig){est='Falta';cls='bad';falta=true}
-    else if(r.k==='padron_previo'){est='Opcional: sin él no se arma el padrón';cls='warn'}
-    else {est='Opcional';cls='warn'}
-    h+=`<div class="f"><div><div class="n">${r.n}</div><div class="t">${f?f.name+' · '+(f.size/1048576).toFixed(1)+' MB':(enMem?'—':'sin archivo')}</div></div><span class="pill ${cls}">${est}</span></div>`;
+  let h='';
+  const dir=[['concentrado','Concentrado de dependencias (si ya viene armado)','Opcional'],['suac','SUAC (CESAC)','Opcional'],['amazonica','Amazónica','Opcional'],['padron_previo','Padrón de la semana pasada','Opcional: sin él no se arma el padrón'],['base_previa','Base única de la semana pasada','Opcional: sin ella no se conserva lo que falte']];
+  for(const [k,n,vacio] of dir){
+    const f=files[k];const enMem=(k==='padron_previo'&&memoria.padron)||(k==='base_previa'&&memoria.base);
+    h+=`<div class="f"><div><div class="n">${n}</div><div class="t">${f?f.name+' · '+(f.size/1048576).toFixed(1)+' MB':(enMem?'recordado de la semana pasada':'sin archivo')}</div></div><span class="pill ${f||enMem?'ok':'warn'}">${f?'Listo':(enMem?'Recordado':vacio)}</span></div>`;
   }
-  for(const k of Object.keys(files).filter(k=>k.startsWith('x:')))h+=`<div class="f"><div><div class="n">${files[k].name}</div><div class="t">No lo reconozco; no se usará</div></div><span class="pill warn">Sin usar</span></div>`;
+  if(sueltos.length){
+    h+='<div class="f" style="border-top:1px solid var(--line);padding-top:16px"><div class="n" style="text-transform:uppercase;font-size:11px;letter-spacing:.16em;color:var(--mut)">Bases de las áreas (sueltas)</div></div>';
+    sueltos.forEach((s,i)=>{
+      const op=['<option value="">¿De qué área es?</option>'].concat(AREAS.map(([c,n])=>`<option value="${c}" ${s.prefijo===c?'selected':''}>${n}</option>`)).join('');
+      h+=`<div class="f"><div><div class="n">${s.file.name}</div><div class="t">${(s.file.size/1048576).toFixed(2)} MB</div></div><div class="row" style="gap:8px"><select data-i="${i}" class="area">${op}</select><button class="sec" data-q="${i}" title="Quitar">✕</button></div></div>`;
+    });
+  }
   $('#lista').innerHTML=h;
-  $('#go').disabled=falta||!listo||corriendo||!$('#corte').value;
+  document.querySelectorAll('select.area').forEach(sel=>sel.onchange=()=>{sueltos[+sel.dataset.i].prefijo=sel.value;pinta()});
+  document.querySelectorAll('button[data-q]').forEach(b=>b.onclick=()=>{sueltos.splice(+b.dataset.q,1);pinta()});
+  const hayFuente=!!files.concentrado||sueltos.length>0, todasConArea=sueltos.every(s=>s.prefijo);
+  $('#go').disabled=!(hayFuente&&todasConArea)||!listo||corriendo||!$('#corte').value;
+  $('#est').textContent=!hayFuente?'Sube al menos una base de un área o el concentrado.':(!todasConArea?'Elige de qué área es cada base suelta.':($('#est').textContent.startsWith('Sube')||$('#est').textContent.startsWith('Elige')?'':$('#est').textContent));
 }
 $('#drop').onclick=()=>$('#inp').click();
 $('#inp').onchange=e=>agrega([...e.target.files]);
@@ -144,11 +157,12 @@ function arranca(){
 $('#go').onclick=async()=>{
   corriendo=true;$('#go').disabled=true;$('#res').hidden=true;$('#log').textContent='';$('#est').textContent='Trabajando… puede tardar varios minutos. No cierres esta pestaña.';
   const arch={};
-  for(const k of ['concentrado','suac','amazonica'])arch[k]=await files[k].arrayBuffer();
+  for(const k of ['concentrado','suac','amazonica'])if(files[k])arch[k]=await files[k].arrayBuffer();
   if(files.padron_previo)arch.padron_previo=await files.padron_previo.arrayBuffer();else if(memoria.padron)arch.padron_previo=await new Response(memoria.padron).arrayBuffer();
   const bp=files.base_previa?await files.base_previa.arrayBuffer():(memoria.base?await new Response(memoria.base).arrayBuffer():null);
   if(bp)arch.base_previa=bp;
-  worker.postMessage({tipo:'correr',dato:{archivos:arch,corte:$('#corte').value}},Object.values(arch));
+  const sb=[];for(const s of sueltos)sb.push({buf:await s.file.arrayBuffer(),prefijo:s.prefijo,nombre:s.file.name});
+  worker.postMessage({tipo:'correr',dato:{archivos:arch,sueltos:sb,corte:$('#corte').value}},Object.values(arch).concat(sb.map(s=>s.buf)));
 };
 async function terminar(d){
   const corte=$('#corte').value;
