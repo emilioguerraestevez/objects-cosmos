@@ -90,7 +90,7 @@ async function cargaMemoria(){
   const m=$('#mem');
   if(memoria.padron&&memoria.base){m.innerHTML='Nebula recuerda la semana pasada (corte '+memoria.corte+'). No necesitas subir el padrón ni la base anterior. <a href="#" id="olv">Olvidar</a>';
     $('#olv').onclick=async e=>{e.preventDefault();await kvDel();location.reload()}}
-  else m.textContent='Primera vez: sube también el padrón y la base única del corte anterior (archivos .csv). Nebula los recordará para la siguiente semana.';
+  else m.textContent='Primera vez: si quieres que Nebula arme también el padrón, sube además el padrón y la base única del corte anterior (archivos .csv). Nebula los recordará para la siguiente semana. Sin ellos solo prepara la base única.';
   pinta();
 }
 
@@ -111,7 +111,8 @@ function pinta(){
     let est,cls;
     if(f){est='Listo';cls='ok'}
     else if(enMem){est='Recordado de la semana pasada';cls='ok'}
-    else if(r.oblig||r.k==='padron_previo'){est=r.oblig?'Falta':'Falta (primera vez)';cls='bad';falta=true}
+    else if(r.oblig){est='Falta';cls='bad';falta=true}
+    else if(r.k==='padron_previo'){est='Opcional: sin él no se arma el padrón';cls='warn'}
     else {est='Opcional';cls='warn'}
     h+=`<div class="f"><div><div class="n">${r.n}</div><div class="t">${f?f.name+' · '+(f.size/1048576).toFixed(1)+' MB':(enMem?'—':'sin archivo')}</div></div><span class="pill ${cls}">${est}</span></div>`;
   }
@@ -144,19 +145,19 @@ $('#go').onclick=async()=>{
   corriendo=true;$('#go').disabled=true;$('#res').hidden=true;$('#log').textContent='';$('#est').textContent='Trabajando… puede tardar varios minutos. No cierres esta pestaña.';
   const arch={};
   for(const k of ['concentrado','suac','amazonica'])arch[k]=await files[k].arrayBuffer();
-  arch.padron_previo=files.padron_previo?await files.padron_previo.arrayBuffer():await new Response(memoria.padron).arrayBuffer();
+  if(files.padron_previo)arch.padron_previo=await files.padron_previo.arrayBuffer();else if(memoria.padron)arch.padron_previo=await new Response(memoria.padron).arrayBuffer();
   const bp=files.base_previa?await files.base_previa.arrayBuffer():(memoria.base?await new Response(memoria.base).arrayBuffer():null);
   if(bp)arch.base_previa=bp;
   worker.postMessage({tipo:'correr',dato:{archivos:arch,corte:$('#corte').value}},Object.values(arch));
 };
 async function terminar(d){
   const corte=$('#corte').value;
-  await kvSet('corte',corte);await kvSet('padron',new Blob([d.cp]));await kvSet('base',new Blob([d.cb]));
+  await kvSet('corte',corte);if(d.cp)await kvSet('padron',new Blob([d.cp]));await kvSet('base',new Blob([d.cb]));
   const r=d.res;corriendo=false;$('#est').textContent='Listo';
   const url=URL.createObjectURL(new Blob([d.zip],{type:'application/zip'}));
   const li=a=>a.length?'<ul class="av">'+a.map(x=>'<li>'+x.replace(/</g,'&lt;')+'</li>').join('')+'</ul>':'<p style="color:var(--mut);margin:4px 0 0">Nada pendiente.</p>';
   $('#res').hidden=false;
-  $('#res').innerHTML=`<h3>Paquete listo</h3><div class="kp"><div><b>${r.filas.toLocaleString('es-MX')}</b><span>atenciones</span></div><div><b>${r.personas.toLocaleString('es-MX')}</b><span>personas</span></div><div><b>${r.altas.toLocaleString('es-MX')}</b><span>personas nuevas</span></div></div>
+  $('#res').innerHTML=`<h3>Paquete listo</h3><div class="kp"><div><b>${r.filas.toLocaleString('es-MX')}</b><span>atenciones</span></div>${r.personas?`<div><b>${r.personas.toLocaleString('es-MX')}</b><span>personas</span></div><div><b>${r.altas.toLocaleString('es-MX')}</b><span>personas nuevas</span></div>`:''}</div>
   <p style="margin:18px 0 6px"><a href="${url}" download="NEBULA_${corte}_para_IT.zip"><button>Descargar el paquete para IT</button></a></p>
   <p class="paso">Siguiente paso: <b>sube ese archivo a la carpeta de Drive de IT</b>.</p>
   <h2 style="margin-top:26px">Para pedir a las áreas (lo atiende Ana)</h2>${li(r.avisos.ana)}

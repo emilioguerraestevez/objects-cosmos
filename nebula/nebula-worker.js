@@ -29,15 +29,15 @@ async function correr(d) {
   const resultado = py.runPython(`
 import json, pipeline
 r = json.loads(rutas_js)
-res = pipeline.correr(r['concentrado'], r['suac'], r['amazonica'], r['padron_previo'], corte_js, '/work/out/NEBULA_' + corte_js,
+res = pipeline.correr(r['concentrado'], r['suac'], r['amazonica'], r.get('padron_previo'), corte_js, '/work/out/NEBULA_' + corte_js,
                       r.get('base_previa'), log=print)
 json.dumps({'zip': res['zip'], 'csv_base': res['archivos']['csv_base'], 'csv_padron': res['archivos']['csv_padron'],
             'avisos': res['avisos'], 'filas': res['filas'], 'personas': res['personas'], 'altas': res['altas']})
 `);
   const res = JSON.parse(resultado);
   const leer = p => { const u = py.FS.readFile(p); return u.buffer.slice(u.byteOffset, u.byteOffset + u.byteLength); };
-  const zip = leer(res.zip), cb = leer(res.csv_base), cp = leer(res.csv_padron);
-  post('resultado', { res, zip, cb, cp }, [zip, cb, cp]);
+  const zip = leer(res.zip), cb = leer(res.csv_base), cp = res.csv_padron ? leer(res.csv_padron) : null;
+  post('resultado', { res, zip, cb, cp }, [zip, cb].concat(cp ? [cp] : []));
   // libera memoria
   py.runPython("import shutil; shutil.rmtree('/work', ignore_errors=True)");
 }
