@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Nebula</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+<style>
+:root{--paper:#fff;--card:#f7f6f2;--ink:#1c1b19;--mut:#6b6b70;--line:rgba(28,27,25,.12);--ok:#2c7a4b;--okbg:#e4f1e9;--warn:#9a6a10;--warnbg:#f8ecd2;--bad:#8b2e2e;--badbg:#f3dede;--btn:#0e1c30;--btnfg:#fff;--rojo:#e63423;--amar:#f6e359;--sans:Montserrat,-apple-system,"Helvetica Neue",Arial,sans-serif}
+@media (prefers-color-scheme:dark){:root{--paper:#0e1c30;--card:#142640;--ink:#f1efe9;--mut:#93a3bd;--line:rgba(255,255,255,.14);--ok:#5fcf8f;--okbg:#12362a;--warn:#e8b64a;--warnbg:#3a2d10;--bad:#f08a82;--badbg:#3d1a1a;--btn:#f1efe9;--btnfg:#0e1c30;--rojo:#ff5a45;--amar:#f6e359}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.6 var(--sans);padding:40px 24px 64px}
+.wrap{max-width:820px;margin:0 auto}
+.mast{padding-bottom:16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.logo{height:30px;width:auto}
+@media (prefers-color-scheme:dark){.logo{filter:brightness(0) invert(1)}}
+.tit{font-size:54px;line-height:1.02;font-weight:700;letter-spacing:-.035em;margin:34px 0 6px}
+.tit:after{content:'';display:block;width:84px;height:8px;background:var(--amar);margin-top:14px;border-radius:2px}
+.sub{font-size:18px;color:var(--mut);margin:12px 0 0;max-width:34em}
+.wm{font-weight:800;font-size:32px;letter-spacing:-.03em;line-height:1}
+.wm small{display:block;font-weight:600;font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--mut);margin-top:9px}
+.priv{font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);text-align:right;line-height:1.7}
+h2{font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);margin:34px 0 12px}
+.drop{border:1.5px dashed var(--line);border-radius:22px;background:var(--card);padding:38px 24px;text-align:center;cursor:pointer;transition:.15s}
+.drop.on{border-color:var(--rojo)}
+.drop b{display:block;font-size:20px;font-weight:700;letter-spacing:-.01em}
+.drop span{color:var(--mut);font-size:14px}
+.lista{margin-top:14px}
+.f{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 0;border-top:1px solid var(--line);font-size:14px}
+.f:first-child{border-top:0}
+.f .n{font-weight:600}.f .t{color:var(--mut);font-size:12.5px}
+.pill{display:inline-block;font-size:11px;font-weight:700;padding:3px 11px;border-radius:999px;white-space:nowrap}
+.ok{background:var(--okbg);color:var(--ok)}.warn{background:var(--warnbg);color:var(--warn)}.bad{background:var(--badbg);color:var(--bad)}
+.card{background:var(--card);border-radius:18px;padding:20px 24px}
+.row{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+label{font-size:13px;font-weight:600;color:var(--mut)}
+input[type=date]{font:600 15px var(--sans);border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:12px;padding:9px 12px}
+button{font:600 15px var(--sans);border:0;background:var(--btn);color:var(--btnfg);padding:14px 26px;border-radius:999px;cursor:pointer}
+button.sec{background:transparent;color:var(--ink);border:1px solid var(--line);font-weight:600;font-size:13px;padding:8px 16px}
+button:disabled{opacity:.4;cursor:not-allowed}
+.log{margin-top:14px;font:500 12.5px/1.6 ui-monospace,Menlo,monospace;color:var(--mut);white-space:pre-wrap;max-height:220px;overflow:auto;background:var(--card);border-radius:14px;padding:14px 16px}
+.res h3{margin:0 0 6px;font-size:26px;letter-spacing:-.02em}
+.kp{display:flex;gap:28px;flex-wrap:wrap;margin:14px 0 4px}
+.kp div b{display:block;font-size:26px;letter-spacing:-.02em;line-height:1.1}.kp div span{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+ul.av{margin:8px 0 0;padding-left:20px}ul.av li{margin:6px 0;font-size:14.5px}
+.paso{font-size:15px}
+.pie{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.nota{margin-top:26px;color:var(--mut);font-size:12.5px}
+[hidden]{display:none!important}
+</style></head><body><div class="wrap">
+<div class="mast"><img class="logo" src="cosmos_ink.png" alt="cosmos.ai"><div class="priv">Los archivos se procesan en esta computadora.<br>No se suben a ningún servidor.</div></div>
+<h1 class="tit">Nebula</h1>
+<p class="sub">Sube las bases de la semana y recibe el paquete listo para IT.</p>
+
+<h2>1 · Sube las bases de la semana</h2>
+<div class="drop" id="drop"><b>Arrastra aquí todas las bases</b><span>o haz clic para elegirlas (puedes seleccionar varias a la vez)</span>
+<input id="inp" type="file" multiple hidden></div>
+<div class="lista card" id="lista" style="margin-top:14px"></div>
+
+<h2>2 · Fecha del corte</h2>
+<div class="row"><label for="corte">Fecha de las bases</label><input type="date" id="corte"></div>
+
+<h2>3 · Prepara el paquete</h2>
+<div class="row"><button id="go" disabled>Preparar el paquete para IT</button><span id="est" style="color:var(--mut);font-size:14px"></span></div>
+<div class="log" id="log" hidden></div>
+
+<div id="res" hidden class="card res" style="margin-top:22px"></div>
+
+<div class="nota" id="mem"></div>
+<div class="pie"><span>Nebula · uso interno</span><span>Hecho en México, por humanos, con ayuda de las máquinas.</span></div>
+<div class="nota"> Por ahora arma el paquete a partir del <b>concentrado ya integrado</b>, el SUAC y Amazónica. El armado del concentrado desde las bases sueltas de cada área viene en la siguiente versión.</div>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+const ROLES=[
+ {k:'concentrado',n:'Concentrado de dependencias',re:/concentrado|bdd/i,ext:/\.xlsx$/i,oblig:true},
+ {k:'suac',n:'SUAC (CESAC)',re:/cesac|suac/i,ext:/\.xlsx$/i,oblig:true},
+ {k:'amazonica',n:'Amazónica',re:/amaz[oó]nica/i,ext:/\.xlsx$/i,oblig:true},
+ {k:'padron_previo',n:'Padrón de la semana pasada',re:/padron/i,ext:/\.csv$/i,oblig:false},
+ {k:'base_previa',n:'Base única de la semana pasada',re:/base[_ ]?unica/i,ext:/\.csv$/i,oblig:false}];
+const files={}; let memoria={}; let worker=null, listo=false, corriendo=false;
+
+// ── memoria de la semana pasada (queda solo en este navegador)
+const DB=()=>new Promise((ok,er)=>{const r=indexedDB.open('nebula',1);r.onupgradeneeded=()=>r.result.createObjectStore('kv');r.onsuccess=()=>ok(r.result);r.onerror=()=>er(r.error)});
+async function kvGet(k){try{const d=await DB();return await new Promise(ok=>{const q=d.transaction('kv').objectStore('kv').get(k);q.onsuccess=()=>ok(q.result);q.onerror=()=>ok(null)})}catch(e){return null}}
+async function kvSet(k,v){try{const d=await DB();await new Promise((ok,er)=>{const t=d.transaction('kv','readwrite');t.objectStore('kv').put(v,k);t.oncomplete=ok;t.onerror=()=>er(t.error)})}catch(e){}}
+async function kvDel(){try{const d=await DB();d.transaction('kv','readwrite').objectStore('kv').clear()}catch(e){}}
+async function cargaMemoria(){
+  memoria={corte:await kvGet('corte'),padron:await kvGet('padron'),base:await kvGet('base')};
+  const m=$('#mem');
+  if(memoria.padron&&memoria.base){m.innerHTML='Nebula recuerda la semana pasada (corte '+memoria.corte+'). No necesitas subir el padrón ni la base anterior. <a href="#" id="olv">Olvidar</a>';
+    $('#olv').onclick=async e=>{e.preventDefault();await kvDel();location.reload()}}
+  else m.textContent='Primera vez: sube también el padrón y la base única del corte anterior (archivos .csv). Nebula los recordará para la siguiente semana.';
+  pinta();
+}
+
+// ── archivos
+function clasifica(f){for(const r of ROLES){if(r.re.test(f.name)&&r.ext.test(f.name))return r.k}return null}
+function agrega(lst){for(const f of lst){const k=clasifica(f);if(k)files[k]=f;else files['x:'+f.name]=f}pinta();detectaFecha()}
+function detectaFecha(){
+  if($('#corte').dataset.manual)return;
+  const f=files.concentrado;if(!f)return;
+  const m=f.name.toLowerCase().match(/(\d{1,2})\s*(ene|feb|mar|abr|may|jun|jul|ago|sep|oct|nov|dic)/);
+  if(m){const mes=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'].indexOf(m[2])+1;
+    const y=new Date().getFullYear();$('#corte').value=`${y}-${String(mes).padStart(2,'0')}-${String(m[1]).padStart(2,'0')}`}
+}
+function pinta(){
+  let h='';let falta=false;
+  for(const r of ROLES){
+    const f=files[r.k];const enMem=(r.k==='padron_previo'&&memoria.padron)||(r.k==='base_previa'&&memoria.base);
+    let est,cls;
+    if(f){est='Listo';cls='ok'}
+    else if(enMem){est='Recordado de la semana pasada';cls='ok'}
+    else if(r.oblig||r.k==='padron_previo'){est=r.oblig?'Falta':'Falta (primera vez)';cls='bad';falta=true}
+    else {est='Opcional';cls='warn'}
+    h+=`<div class="f"><div><div class="n">${r.n}</div><div class="t">${f?f.name+' · '+(f.size/1048576).toFixed(1)+' MB':(enMem?'—':'sin archivo')}</div></div><span class="pill ${cls}">${est}</span></div>`;
+  }
+  for(const k of Object.keys(files).filter(k=>k.startsWith('x:')))h+=`<div class="f"><div><div class="n">${files[k].name}</div><div class="t">No lo reconozco; no se usará</div></div><span class="pill warn">Sin usar</span></div>`;
+  $('#lista').innerHTML=h;
+  $('#go').disabled=falta||!listo||corriendo||!$('#corte').value;
+}
+$('#drop').onclick=()=>$('#inp').click();
+$('#inp').onchange=e=>agrega([...e.target.files]);
+['dragover','dragenter'].forEach(ev=>$('#drop').addEventListener(ev,e=>{e.preventDefault();$('#drop').classList.add('on')}));
+['dragleave','drop'].forEach(ev=>$('#drop').addEventListener(ev,e=>{e.preventDefault();$('#drop').classList.remove('on')}));
+$('#drop').addEventListener('drop',e=>agrega([...e.dataTransfer.files]));
+$('#corte').oninput=()=>{$('#corte').dataset.manual='1';pinta()};
+
+// ── motor
+function log(t){const l=$('#log');l.hidden=false;l.textContent+=t+'\n';l.scrollTop=l.scrollHeight}
+function arranca(){
+  worker=new Worker('nebula-worker.js');
+  worker.onmessage=async e=>{
+    const {tipo,dato}=e.data;
+    if(tipo==='estado'){$('#est').textContent=dato}
+    if(tipo==='log'){log(dato)}
+    if(tipo==='listo'){listo=true;$('#est').textContent='Motor listo';pinta()}
+    if(tipo==='error'){corriendo=false;$('#est').textContent='';log('ERROR:\n'+dato);$('#go').disabled=false;$('#est').textContent='Hubo un problema. Copia el texto del recuadro gris y mándaselo a Emilio.'}
+    if(tipo==='resultado'){await terminar(dato)}
+  };
+  worker.postMessage({tipo:'iniciar'});
+}
+$('#go').onclick=async()=>{
+  corriendo=true;$('#go').disabled=true;$('#res').hidden=true;$('#log').textContent='';$('#est').textContent='Trabajando… puede tardar varios minutos. No cierres esta pestaña.';
+  const arch={};
+  for(const k of ['concentrado','suac','amazonica'])arch[k]=await files[k].arrayBuffer();
+  arch.padron_previo=files.padron_previo?await files.padron_previo.arrayBuffer():await new Response(memoria.padron).arrayBuffer();
+  const bp=files.base_previa?await files.base_previa.arrayBuffer():(memoria.base?await new Response(memoria.base).arrayBuffer():null);
+  if(bp)arch.base_previa=bp;
+  worker.postMessage({tipo:'correr',dato:{archivos:arch,corte:$('#corte').value}},Object.values(arch));
+};
+async function terminar(d){
+  const corte=$('#corte').value;
+  await kvSet('corte',corte);await kvSet('padron',new Blob([d.cp]));await kvSet('base',new Blob([d.cb]));
+  const r=d.res;corriendo=false;$('#est').textContent='Listo';
+  const url=URL.createObjectURL(new Blob([d.zip],{type:'application/zip'}));
+  const li=a=>a.length?'<ul class="av">'+a.map(x=>'<li>'+x.replace(/</g,'&lt;')+'</li>').join('')+'</ul>':'<p style="color:var(--mut);margin:4px 0 0">Nada pendiente.</p>';
+  $('#res').hidden=false;
+  $('#res').innerHTML=`<h3>Paquete listo</h3><div class="kp"><div><b>${r.filas.toLocaleString('es-MX')}</b><span>atenciones</span></div><div><b>${r.personas.toLocaleString('es-MX')}</b><span>personas</span></div><div><b>${r.altas.toLocaleString('es-MX')}</b><span>personas nuevas</span></div></div>
+  <p style="margin:18px 0 6px"><a href="${url}" download="NEBULA_${corte}_para_IT.zip"><button>Descargar el paquete para IT</button></a></p>
+  <p class="paso">Siguiente paso: <b>sube ese archivo a la carpeta de Drive de IT</b>.</p>
+  <h2 style="margin-top:26px">Para pedir a las áreas (lo atiende Ana)</h2>${li(r.avisos.ana)}
+  <h2>Para que decida Emilio</h2>${li(r.avisos.emilio)}`;
+  await cargaMemoria();pinta();
+}
+cargaMemoria();arranca();
+</script></body></html>
